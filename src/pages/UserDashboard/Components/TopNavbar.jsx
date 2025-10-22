@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { 
+import {
   MagnifyingGlassIcon,
   QuestionMarkCircleIcon,
   BellIcon,
@@ -8,6 +8,7 @@ import {
   CheckCircleIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
+import { IconClipboardSmile, IconCopy } from '@tabler/icons-react';
 
 export default function TopNavbar() {
   const [searchFocus, setSearchFocus] = useState(false);
@@ -56,30 +57,28 @@ export default function TopNavbar() {
 
   return (
     <>
-     
+
 
       <div className="emk-topnav">
         {/* Left Section */}
         <div className="emk-topnav-left">
-          <div className="emk-search-wrapper">
-            <MagnifyingGlassIcon className="emk-search-icon" />
-            <input 
-              type="text" 
-              className="emk-search-input"
-              placeholder="Search orders, products, or customers..."
-              onFocus={() => setSearchFocus(true)}
-              onBlur={() => setSearchFocus(false)}
-            />
-            <div className="emk-search-kbd">
-              <span className="emk-kbd">K</span>
-              <span className="emk-kbd-icon">⌘</span>
+          <div className="emk-referla-link">
+            <button className="emk-referal-btn">
+              Referal Link
+            </button>
+            <input type="text"disabled className='emk-referal-input' value="https://example.com/referral?ref=richard123" />
+            <div className="emk-copy-icon">
+              <IconClipboardSmile size={20}/>
             </div>
+
           </div>
+
         </div>
 
-        {/* Right Section */}
+
         <div className="emk-topnav-right">
-          <button className='custom-btn-border-color emk-shop-btn'>
+          <button className='custom-btn-border-color emk-shop-btn' aria-label="My Shop">
+            <ShoppingCartIcon className="emk-shop-icon" />
             My Shop
           </button>
 
@@ -88,11 +87,11 @@ export default function TopNavbar() {
           </button>
 
           <div className="emk-notification-wrapper">
-            <button 
+            <button
               className="emk-icon-button"
               onClick={() => setNotificationOpen(!notificationOpen)}
             >
-              <BellIcon  className="emk-icon-button-icon" />
+              <BellIcon className="emk-icon-button-icon" />
               {unreadCount > 0 && (
                 <span className="emk-notification-badge">{unreadCount}</span>
               )}
@@ -108,7 +107,7 @@ export default function TopNavbar() {
                 {notifications.map((notification) => {
                   const Icon = notification.icon;
                   return (
-                    <div 
+                    <div
                       key={notification.id}
                       className={`emk-notification-item ${notification.unread ? 'emk-notification-item-unread' : ''}`}
                     >
@@ -135,8 +134,8 @@ export default function TopNavbar() {
           </div>
 
           <button className="emk-profile-button">
-            <img 
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" 
+            <img
+              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
               alt="Profile"
               className="emk-profile-image"
             />

@@ -295,36 +295,7 @@
 
 
 
-.emk-search-wrapper {
-    position: relative;
-    max-width: 400px;
-    flex: 1;
 
-}
-
-.emk-search-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    color: #9ca3af;
-    pointer-events: none;
-}
-
-.emk-search-input {
-    width: 100%;
-    padding: 10px 20px;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding-left: 40px;
-    font-size: 14px;
-    color: #111827;
-    background: #f9fafb;
-    transition: all 0.2s;
-    outline: none;
-}
 
 .emk-shop-btn {
     padding: 10px 20px;
@@ -334,40 +305,52 @@
     cursor: pointer;
     background: #f9fafb;
     transition: all 0.2s;
-}
-
-.emk-search-input::placeholder {
-    color: #9ca3af;
-}
-
-.emk-search-kbd {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
     display: flex;
     align-items: center;
-    gap: 4px;
-    pointer-events: none;
+    gap: 5px;
+
 }
 
-.emk-kbd {
-    padding: 4px 8px;
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 4px;
+.emk-shop-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--main-green);
+}
+
+.emk-referla-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px ;
+    background-color:  #f4f4f4;
+    border-radius: 9px;
+    max-width: 340px;
+    flex: 1;
+    justify-content: space-between;
+
+}
+.emk-referal-btn {
+    padding: 6px 12px;
+    background-color: white;
+    color: var(--main-green);
+    border: none;
+    border-radius: 8px;
     font-size: 12px;
-    font-weight: 600;
-    color: #6b7280;
+    
+    cursor: pointer;
 }
 
-.emk-kbd-icon {
-    padding: 2px 6px;
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 4px;
-    font-size: 14px;
-    color: #6b7280;
+.emk-copy-icon{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    /* background-color: var(--main-green); */
+    color: var(--main-green);
+    border-radius: 5px;
 }
 
 .emk-topnav-right {
