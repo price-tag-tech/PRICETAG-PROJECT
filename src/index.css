@@ -1,0 +1,317 @@
+/* MacanPanWeb Font Family */
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-ThinItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-Extralight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-ExtralightItalic.ttf') format('truetype');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-RegularItalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-Semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-SemiboldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-Extrabold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-ExtraboldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-Book.ttf') format('truetype');
+  font-weight: 350;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MacanPanWeb';
+  src: url('assets/fonts/MacanPanWeb-BookItalic.ttf') format('truetype');
+  font-weight: 350;
+  font-style: italic;
+  font-display: swap;
+}
+
+
+
+
+
+* {
+  box-sizing: border-box;
+}
+*,
+:after,
+:before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'MacanPanWeb', sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'MacanPanWeb', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 1.5;
+  width: 100%;
+  background-color: #fff;
+  color: #222325;
+  overflow-x: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+li {
+  list-style: none;
+}
+a:hover,
+a:focus,
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a,
+button {
+  outline: none;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+a,
+button,
+input,
+span,
+textarea,
+select {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+}
+select option {
+  font-size: 13px;
+}
+.large-container {
+  width: 90%;
+  margin-left: 5%;
+}
+
+
+/* For Chrome, Safari, Edge autofill background removal */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important; 
+  -webkit-text-fill-color: #222325 !important; 
+}
+
+/* Optional: focus & hover states */
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover {
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  -webkit-text-fill-color: #222325 !important;
+}
+
+
+
+
+
+/* custom-container */
+
+.custom-container{
+    position: relative;
+    width: 90%;
+    margin-left: 5%;
+    height: auto;
+}
+
+/* custom-btn */
+
+.custom-btn-background{
+  background-color: #222325;
+  color: #fff;
+}
+
+.custom-btn-border-color{
+  border-color: #222325;
+  color: #222325;
+}
+.custom-btn-radius{
+  border-radius: 5px;
+}
+
+.dd-none {
+  display: none !important;
+}
+
+.custom-scroll-bar {
+  overflow-y: overlay;
+  overflow-x: hidden;
+}
+
+@media screen and (min-width: 1200px) {
+  .custom-scroll-bar {
+    overflow-y: overlay;
+    overflow-x: hidden;
+    scrollbar-color: #787777 #fff !important;
+    scrollbar-width: thin; 
+  }
+
+  .custom-scroll-bar::-webkit-scrollbar {
+    width: 3px; 
+    height: 8px; 
+  }
+
+  /* Thumb styling */
+  .custom-scroll-bar::-webkit-scrollbar-thumb {
+    background-color: #787777;
+    border-radius: 10px;
+  }
+}
+
+
+/* Text */
+
+.large-text{
+  font-size: 100px;
+  line-height: 110px;
+}
+.big-text{
+  font-size: 40px;
+  line-height: 56px;
+}
+.mid-text{
+  font-size: 25px;
+  line-height: 36px;
+}
