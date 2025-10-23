@@ -1,5 +1,4 @@
 import './App.css'
-import './pages/UserDashboard/Styles/style.css';
 import { Routes, Route } from 'react-router-dom';
 import ScrollToTop from "./assets/ScrollToTop";
 import Landingpage from './pages/Landingpage/Landingpage';
