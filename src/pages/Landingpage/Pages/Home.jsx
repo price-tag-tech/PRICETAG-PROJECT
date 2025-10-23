@@ -7,6 +7,7 @@ const Home = () => {
     <div>
       <h1>Landing Home </h1>
 
+      
     </div>
   );
 };
