@@ -66,7 +66,7 @@ export default function TopNavbar() {
             <button className="emk-referal-btn">
               Referal Link
             </button>
-            <input type="text"disabled className='emk-referal-input' value="https://example.com/referral?ref=richard123" />
+            <input type="text"disabled className='emk-referal-input' value="https://pricetag.ng/c/67d859bc-b2b4..." />
             <div className="emk-copy-icon">
               <IconClipboardSmile size={20}/>
             </div>
