@@ -1,6 +1,6 @@
 import { Router, Routes, Route } from "react-router-dom";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
-import "./Styles/style.css"
+import "./style.css"
 import SideNavbar from "./Components/SideNavbar";
 import TopNavbar from "./Components/TopNavbar";
 
