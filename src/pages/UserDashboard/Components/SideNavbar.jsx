@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   HomeIcon, 
   ShoppingCartIcon, 
@@ -16,12 +16,27 @@ import {
   ArrowDownLeftIcon,
   ArrowLeftIcon
 } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
 
 import Logo from "../../../assets/images/logo.png"
 
 export default function SideNavbar() {
   const [activeMenuItem, setActiveMenuItem] = useState('overview');
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const profileRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isProfileOpen && profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isProfileOpen]);
 
   const mainMenuItems = [
     { id: 'overview', label: 'Overview', icon: HomeIcon },
@@ -35,6 +50,10 @@ export default function SideNavbar() {
     { id: 'settings', label: 'Profile Settings', icon: Cog6ToothIcon },
   ];
 
+  const handleDropdownItemClick = () => {
+    setIsProfileOpen(false);
+  };
+
   return (
     <>
      
@@ -42,10 +61,9 @@ export default function SideNavbar() {
       <div className="emk-sidebar">
         {/* Logo Header */}
         <div className="emk-logo-header">
-          <div className="emk-logo-icon">
-            <img src={Logo} alt="" />
-          </div>
-          
+          <Link to="/user-dashboard" className="emk-logo-icon">
+              <img src={Logo} alt="" />
+          </Link>
         </div>
 
         {/* Menu Content */}
@@ -80,18 +98,18 @@ export default function SideNavbar() {
         </div>
 
         {/* Profile Section */}
-        <div className="emk-profile-section">
+        <div className="emk-profile-section" ref={profileRef}>
           <div className={`emk-profile-dropdown ${isProfileOpen ? 'emk-profile-dropdown-open' : ''}`}>
-            <button className="emk-dropdown-item">
+            <button className="emk-dropdown-item" onClick={handleDropdownItemClick}>
               <UserIcon className="emk-dropdown-icon" />
               <span>My Profile</span>
             </button>
-            <button className="emk-dropdown-item">
+            <button className="emk-dropdown-item" onClick={handleDropdownItemClick}>
               <Cog6ToothIcon className="emk-dropdown-icon" />
               <span>Account Settings</span>
             </button>
             <div className="emk-dropdown-divider" />
-            <button className="emk-dropdown-item emk-dropdown-item-danger">
+            <button className="emk-dropdown-item emk-dropdown-item-danger" onClick={handleDropdownItemClick}>
               <ArrowLeftIcon className="emk-dropdown-icon" />
               <span>Logout</span>
             </button>
