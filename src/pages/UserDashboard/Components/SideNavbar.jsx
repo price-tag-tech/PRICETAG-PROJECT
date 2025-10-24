@@ -39,8 +39,8 @@ export default function SideNavbar() {
   const mainMenuItems = [
     { id: 'overview', label: 'Overview', icon: HomeIcon, path: '/user-dashboard/overview' },
     { id: 'orders', label: 'Orders and Purchases', icon: ShoppingCartIcon, path: '/user-dashboard/orders' },
-    { id: 'messages', label: 'Messages', icon: ChatBubbleLeftIcon, path: '/user-dashboard/messages', badge: 20 },
-    { id: 'products', label: 'Products', icon: CubeIcon, path: '/user-dashboard/products' },
+    // { id: 'messages', label: 'Messages', icon: ChatBubbleLeftIcon, path: '/user-dashboard/messages', badge: 20 },
+    // { id: 'products', label: 'Products', icon: CubeIcon, path: '/user-dashboard/products' },
     { id: 'affiliate', label: 'Affiliate Earnings', icon: ArrowTrendingUpIcon, path: '/user-dashboard/affiliate' },
     { id: 'notifications', label: 'Notifications', icon: BellIcon, path: '/user-dashboard/notifications' },
     { id: 'settings', label: 'Profile Settings', icon: Cog6ToothIcon, path: '/user-dashboard/settings' },

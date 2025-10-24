@@ -6,6 +6,8 @@ import TopNavbar from "./Components/TopNavbar";
 import Overview from "./Pages/overview";
 import OrdersAndPurchases from "./Pages/PurchasesAndOrders";
 import AffiliateEarningsPage from "./Pages/AffiliateEarnings";
+import Notifications from "./Pages/notification";
+import ProfileSettings from "./Pages/ProfileSettings";
 
 const UserDashboard = () => {
   useDocumentTitle("Dashboard");
@@ -23,6 +25,8 @@ const UserDashboard = () => {
               <Route path="/overview" element={<Overview />} />
               <Route path="/orders" element={<OrdersAndPurchases />} />
               <Route path="/affiliate" element={<AffiliateEarningsPage />} />
+              <Route path="/notifications" element={<Notifications/>} />
+              <Route path="/settings" element={<ProfileSettings/>} />
             </Routes>
           </div>
         </div>

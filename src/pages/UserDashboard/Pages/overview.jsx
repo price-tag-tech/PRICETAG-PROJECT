@@ -159,7 +159,7 @@ export default function Overview() {
     if (window.confirm(`Delete ${selectedRows.length} selected item(s)?`)) {
       console.log('Deleting:', selectedRows);
       setSelectedRows([]);
-      // Add actual delete logic here
+
     }
   };
 
