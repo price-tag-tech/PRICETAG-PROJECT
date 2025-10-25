@@ -441,10 +441,14 @@
 }
 
 .store-stat-number {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 700;
-    width: 80px;
+    width: 90px;
+    height: 70px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 12px;
 }
 

@@ -131,7 +131,7 @@ const StoreDashboard = () => {
               </div>
 
               <div className="store-stat-card store-stat-services">
-                <div className="store-stat-number">0</div>
+                <div className="store-stat-number">100</div>
                 <div className="store-stat-info">
                   <h3>Services</h3>
                   <p>Uploaded services</p>
