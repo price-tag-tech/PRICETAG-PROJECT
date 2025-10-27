@@ -169,7 +169,7 @@ body {
   font-family: 'MacanPanWeb', sans-serif;
   margin: 0;
   padding: 0;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: normal;
   line-height: 1.5;
   width: 100%;
@@ -177,7 +177,11 @@ body {
   color: #222325;
   overflow-x: hidden;
 }
-
+@media screen and (max-width:1100px){
+  body {
+    font-size: 15px !important;
+  }
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -224,11 +228,6 @@ select {
 select option {
   font-size: 13px;
 }
-.large-container {
-  width: 90%;
-  margin-left: 5%;
-}
-
 
 /* For Chrome, Safari, Edge autofill background removal */
 input:-webkit-autofill {
@@ -251,21 +250,28 @@ input:-webkit-autofill:hover {
 
 .custom-container{
     position: relative;
-    width: 90%;
-    margin-left: 5%;
+    width: 95%;
+    margin-left: 2.5%;
     height: auto;
 }
 
 /* custom-btn */
 
 .custom-btn-background{
-  background-color: #222325;
-  color: #fff;
+  background-color: #222325 !important;
+  color: #fff !important;
+}
+
+.custom-btn-background:hover{
+  background-color: #333334 !important;
 }
 
 .custom-btn-border-color{
-  border-color: #222325;
-  color: #222325;
+  border-color: #222325 !important;
+  color: #222325 !important;
+}
+.custom-btn-white-hover:hover{
+  background-color: #e9e9e9 !important;
 }
 .custom-btn-radius{
   border-radius: 5px;
@@ -306,12 +312,59 @@ input:-webkit-autofill:hover {
 .large-text{
   font-size: 100px;
   line-height: 110px;
+  font-weight: 500;
+}
+@media screen and (max-width:1100px){
+  .large-text{
+    font-size: 80px !important;
+    line-height: 100px !important;
+  }
+}
+@media screen and (max-width:600px){
+  .large-text{
+    font-size: 70px !important;
+    line-height: 90px !important;
+  }
+    .big-text{
+    font-size: 30px !important;
+    line-height: 41px !important;
+  }
+}
+@media screen and (max-width:500px){
+  .large-text{
+    font-size: 60px !important;
+    line-height: 80px !important;
+  }
+  .big-text{
+    font-size: 25px !important;
+    line-height: 36px !important;
+  }
+  .mid-text{
+    font-size: 20px !important;
+    line-height: 32px !important;
+  }
+}
+@media screen and (max-width:300px){
+  .large-text{
+    font-size: 50px !important;
+    line-height: 70px !important;
+  }
+    .big-text{
+    font-size: 20px !important;
+    line-height: 31px !important;
+  }
+    .mid-text{
+    font-size: 18px !important;
+    line-height: 30px !important;
+  }
 }
 .big-text{
-  font-size: 40px;
-  line-height: 56px;
+  font-size: 35px;
+  line-height: 46px;
+  font-weight: 500;
 }
 .mid-text{
-  font-size: 25px;
-  line-height: 36px;
+  font-size: 22px;
+  line-height: 34px;
+  font-weight: 500;
 }
