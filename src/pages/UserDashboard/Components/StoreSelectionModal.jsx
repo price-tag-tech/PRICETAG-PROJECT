@@ -1,11 +1,12 @@
 import React from 'react';
 import { IconChevronRight, IconPlus, IconX } from '@tabler/icons-react';
+import { useNavigate } from 'react-router-dom';
 
 const StoreSelectionModal = ({ isOpen, onClose, onSelectStore }) => {
   // Mock user plan
   const userPlan = 'Pro';
   const maxStores = userPlan === 'Pro' ? 5 : 1;
-
+  const navigate = useNavigate();
   // Mock stores data
   const stores = [
     {
@@ -29,7 +30,8 @@ const StoreSelectionModal = ({ isOpen, onClose, onSelectStore }) => {
   };
 
   const handleCreateStore = () => {
-    onSelectStore('create');
+     navigate('/user-dashboard/create-store');
+      onClose();
   };
 
   if (!isOpen) return null;

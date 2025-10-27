@@ -1,5 +1,5 @@
 import { ClipboardDocumentCheckIcon, UserCircleIcon } from '@heroicons/react/24/outline';
-import { IconClipboard, IconCopyCheck, IconCurrencyDollar, IconCurrencyNaira, IconUser } from '@tabler/icons-react';
+import { IconClipboard, IconCopyCheck, IconCurrencyDollar, IconCurrencyNaira, IconUser, IconX } from '@tabler/icons-react';
 import React, { useState } from 'react';
 
 const AffiliateEarningsPage = () => {
@@ -7,11 +7,43 @@ const AffiliateEarningsPage = () => {
   const [copied, setCopied] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRows, setSelectedRows] = useState([]);
+  const [withdrawalModalOpen, setWithdrawalModalOpen] = useState(false);
+  const [withdrawalForm, setWithdrawalForm] = useState({
+    amount: '',
+    bankName: '',
+    accountNumber: '',
+    accountName: '',
+    notes: ''
+  });
 
   const handleCopy = () => {
     navigator.clipboard.writeText(referralLink);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleWithdrawalSubmit = (e) => {
+    e.preventDefault();
+    // Handle withdrawal submission logic here
+    console.log('Withdrawal request:', withdrawalForm);
+    // Close modal after submission
+    setWithdrawalModalOpen(false);
+    // Reset form
+    setWithdrawalForm({
+      amount: '',
+      bankName: '',
+      accountNumber: '',
+      accountName: '',
+      notes: ''
+    });
+  };
+
+  const handleWithdrawalInputChange = (e) => {
+    const { name, value } = e.target;
+    setWithdrawalForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const statsData = [
@@ -86,8 +118,6 @@ const AffiliateEarningsPage = () => {
 
   return (
     <div className="affiliate-page-ovr">
-      
-
       {/* Header */}
       <div className="header-section-ovr">
         <div className="header-left-ovr">
@@ -111,11 +141,14 @@ const AffiliateEarningsPage = () => {
               className="referral-input-ovr"
             />
             <button onClick={handleCopy} className="copy-btn-ovr" title={copied ? 'Copied!' : 'Copy'}>
-              <IconClipboard size={20}/>
+              {copied ? <IconCopyCheck size={20} color="#10b981" /> : <IconClipboard size={20} />}
             </button>
           </div>
 
-          <button className="withdraw-btn-ovr">
+          <button 
+            className="withdraw-btn-ovr"
+            onClick={() => setWithdrawalModalOpen(true)}
+          >
             <svg className="withdraw-icon-ovr" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3v-6a3 3 0 00-3-3H6a3 3 0 00-3 3v6a3 3 0 003 3z" />
             </svg>
@@ -241,7 +274,7 @@ const AffiliateEarningsPage = () => {
                   <td colSpan="8" className="empty-state-ovr">
                     <div className="empty-content-ovr">
                       <svg className="empty-icon-ovr" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                       </svg>
                       <p className="empty-title-ovr">No referrals found</p>
                       <p className="empty-subtitle-ovr">Try adjusting your search query</p>
@@ -268,6 +301,123 @@ const AffiliateEarningsPage = () => {
           </div>
         )}
       </div>
+
+      {/* Withdrawal Modal */}
+      {withdrawalModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content ">
+            <div className="modal-header">
+              <h2>Place Withdrawal Request</h2>
+              <button 
+                className="modal-close"
+                onClick={() => setWithdrawalModalOpen(false)}
+              >
+                <IconX size={24} />
+              </button>
+            </div>
+
+            <div className="modal-body">
+              <form onSubmit={handleWithdrawalSubmit} className="edit-form">
+                <div className="form-group">
+                  <label htmlFor="amount">Amount to Withdraw (₦)</label>
+                  <input
+                    type="number"
+                    id="amount"
+                    name="amount"
+                    value={withdrawalForm.amount}
+                    onChange={handleWithdrawalInputChange}
+                    placeholder="Enter amount"
+                    min="100"
+                    max="2700"
+                    required
+                  />
+                  <small style={{ color: '#6b7280', fontSize: '12px' }}>
+                    Available balance: ₦2,700 (Minimum withdrawal: ₦100)
+                  </small>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="bankName">Bank Name</label>
+                  <select
+                    id="bankName"
+                    name="bankName"
+                    value={withdrawalForm.bankName}
+                    onChange={handleWithdrawalInputChange}
+                    required
+                  >
+                    <option value="">Select Bank</option>
+                    <option value="Access Bank">Access Bank</option>
+                    <option value="First Bank">First Bank</option>
+                    <option value="GTBank">GTBank</option>
+                    <option value="Zenith Bank">Zenith Bank</option>
+                    <option value="UBA">UBA</option>
+                    <option value="Union Bank">Union Bank</option>
+                    <option value="Fidelity Bank">Fidelity Bank</option>
+                    <option value="Stanbic IBTC">Stanbic IBTC</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="accountNumber">Account Number</label>
+                  <input
+                    type="text"
+                    id="accountNumber"
+                    name="accountNumber"
+                    value={withdrawalForm.accountNumber}
+                    onChange={handleWithdrawalInputChange}
+                    placeholder="Enter account number"
+                    pattern="[0-9]{10}"
+                    maxLength="10"
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="accountName">Account Name</label>
+                  <input
+                    type="text"
+                    id="accountName"
+                    name="accountName"
+                    value={withdrawalForm.accountName}
+                    onChange={handleWithdrawalInputChange}
+                    placeholder="Enter account name as it appears on bank record"
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="notes">Additional Notes (Optional)</label>
+                  <textarea
+                    id="notes"
+                    name="notes"
+                    value={withdrawalForm.notes}
+                    onChange={handleWithdrawalInputChange}
+                    placeholder="Any additional information..."
+                    rows="3"
+                  />
+                </div>
+
+                <div className="form-actions">
+                  <button 
+                    type="button" 
+                    className="btn-cancel"
+                    onClick={() => setWithdrawalModalOpen(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    type="submit" 
+                    className="btn-save"
+                  >
+                    Submit 
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
