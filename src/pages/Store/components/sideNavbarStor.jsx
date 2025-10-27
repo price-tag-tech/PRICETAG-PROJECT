@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { IconHome, IconPackage, IconShoppingCart, IconChartBar, IconUsers, IconMessage, IconUser, IconCopy, IconX, IconPlus, IconCheck } from '@tabler/icons-react';
-import { Link, useLocation, useNavigate } from 'react-router-dom'; 
-import Logo from "../../../assets/images/logo.png"
+import { IconHome, IconPackage, IconShoppingCart, IconChartBar, IconUsers, IconMessage, IconUser, IconCopy, IconX, IconPlus, IconCheck, IconBuildingStore, IconSettings2, IconSettingsCheck } from '@tabler/icons-react';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'; 
+import Logo from "../../../assets/images/logo.png";
 
 const StoreSidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { storeId } = useParams(); // Get storeId from URL
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [currentStore, setCurrentStore] = useState(0); // Index of current store
   const dropdownRef = useRef(null);
@@ -34,21 +35,35 @@ const StoreSidebar = ({ isOpen, onClose }) => {
     }
   ];
 
+  // Set current store based on URL storeId
+  useEffect(() => {
+    if (storeId) {
+      const storeIndex = stores.findIndex(store => store.id.toString() === storeId);
+      if (storeIndex !== -1) {
+        setCurrentStore(storeIndex);
+      }
+    }
+  }, [storeId]);
+
   const activeStore = stores[currentStore];
   
   const menuItems = [
-    { path: '/store-dashboard', icon: IconHome, label: 'Dashboard' },
-    { path: '/store-dashboard/products', icon: IconPackage, label: 'Products/Services' },
-    { path: '/store-dashboard/orders', icon: IconShoppingCart, label: 'Orders' },
-    { path: '/store-dashboard/inventory', icon: IconChartBar, label: 'Inventory' },
-    { path: '/store-dashboard/customers', icon: IconUsers, label: 'Customers' },
+    { path: `/store-dashboard/${storeId || ''}`, icon: IconBuildingStore, label: 'Dashboard' },
+    { path: `/store-dashboard/${storeId || ''}/products`, icon: IconPackage, label: 'Products/Services' },
+    { path: `/store-dashboard/${storeId || ''}/orders`, icon: IconShoppingCart, label: 'Orders' },
+    { path: `/store-dashboard/${storeId || ''}/inventory`, icon: IconChartBar, label: 'Inventory' },
+    { path: `/store-dashboard/${storeId || ''}/customers`, icon: IconUsers, label: 'Customers' },
+    { path: `/store-dashboard/${storeId || ''}/profile`, icon: IconSettingsCheck, label: 'Profile' }
   ];
 
   const isActive = (path) => {
-    if (path === '/store-dashboard') {
-      return location.pathname === path;
+    const cleanPath = path.replace(/\/$/, ''); // Remove trailing slash
+    const cleanLocation = location.pathname.replace(/\/$/, '');
+    
+    if (cleanPath === `/store-dashboard/${storeId}` || cleanPath === '/store-dashboard') {
+      return cleanLocation === cleanPath;
     }
-    return location.pathname.startsWith(path);
+    return cleanLocation.startsWith(cleanPath);
   };
 
   const handleCopyReferral = () => {
@@ -66,25 +81,30 @@ const StoreSidebar = ({ isOpen, onClose }) => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleStoreSwitch = (index) => {
-    setCurrentStore(index);
+  const handleStoreSwitch = (store) => {
+    setCurrentStore(stores.findIndex(s => s.id === store.id));
     setIsDropdownOpen(false);
+    // Navigate to the selected store's dashboard
+    navigate(`/store-dashboard/${store.id}`);
   };
 
   const handleAddStore = () => {
     setIsDropdownOpen(false);
-    navigate('/store-dashboard/profile');
+    navigate('/store-dashboard/create');
   };
 
   const handleEditStore = () => {
     setIsDropdownOpen(false);
-    navigate('/store-dashboard/profile');
+    navigate(`/store-dashboard/${storeId}/profile`);
+  };
+
+  const handleBackToUserDashboard = () => {
+    navigate('/user-dashboard');
   };
 
   // Click outside handler
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // Check if click is outside both the dropdown and the store info card
       if (
         dropdownRef.current && 
         !dropdownRef.current.contains(event.target) &&
@@ -95,12 +115,10 @@ const StoreSidebar = ({ isOpen, onClose }) => {
       }
     };
 
-    //event listener when dropdown is open
     if (isDropdownOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
 
-    // Cleanup
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -110,9 +128,13 @@ const StoreSidebar = ({ isOpen, onClose }) => {
     <div className={`emk-sidebar ${isOpen ? 'open' : ''}`}>
       {/* Store Header */}
       <div className="emk-logo-header">
-        <Link to="/user-dashboard" className="emk-logo-icon">
-          <img src={Logo} alt="" />
-        </Link>
+        <button 
+          onClick={handleBackToUserDashboard}
+          className="emk-logo-icon"
+          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+        >
+          <img src={Logo} alt="Pricetag" />
+        </button>
         <div className="close-btn-emk" onClick={onClose}>
           <IconX size={20} /> 
         </div>
@@ -153,7 +175,7 @@ const StoreSidebar = ({ isOpen, onClose }) => {
                 <div 
                   key={store.id}
                   className={`store-dropdown-item ${currentStore === index ? 'active' : ''}`}
-                  onClick={() => handleStoreSwitch(index)}
+                  onClick={() => handleStoreSwitch(store)}
                 >
                   <div className="store-dropdown-avatar">
                     <span>{store.initials}</span>
@@ -188,9 +210,9 @@ const StoreSidebar = ({ isOpen, onClose }) => {
             </div>
 
             <div className="store-dropdown-footer">
-              <Link to={"/store-dashboard/profile"} className="store-manage-btn-ptt" onClick={handleEditStore}>
+              <button className="store-manage-btn-ptt" onClick={handleEditStore}>
                 Manage Stores
-              </Link>
+              </button>
             </div>
           </div>
         )}

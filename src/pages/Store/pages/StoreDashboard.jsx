@@ -1,10 +1,12 @@
 import { IconDots, IconPlus, IconUpload } from '@tabler/icons-react';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const StoreDashboard = () => {
   const [filterStatus, setFilterStatus] = useState('All');
-  const Navigate =  useNavigate();
+  const navigate = useNavigate();
+  const { storeId } = useParams(); // Get storeId from URL parameters
+
   const salesData = [
     { day: 'Monday', value: 350000 },
     { day: 'Tuesday', value: 200000 },
@@ -84,12 +86,16 @@ const StoreDashboard = () => {
     ? allOrders 
     : allOrders.filter(order => order.status === filterStatus);
 
- 
+  // Function to generate navigation links with storeId
+  const getStoreLink = (path) => {
+    if (storeId) {
+      return `/store-dashboard/${storeId}${path}`;
+    }
+    return `/store-dashboard${path}`;
+  };
 
   return (
     <>
-     
-
       <div className="overview-container-ovr">
         {/* Welcome Header */}
         <div className="store-welcome">
@@ -98,8 +104,9 @@ const StoreDashboard = () => {
             <span className="store-member-since">Member since 3rd May, 2015</span>
           </div>
           <div className="store-actions">
-            <Link to={"/store-dashboard/profile"} className="store-customize-btn">Customize Store</Link>
-           
+            <Link to={getStoreLink("/profile")} className="store-customize-btn">
+              Customize Store
+            </Link>
           </div>
         </div>
 
@@ -109,11 +116,11 @@ const StoreDashboard = () => {
           <div className="store-left-column">
             {/* Action Buttons */}
             <div className="store-action-buttons">
-              <Link to={"/store-dashboard/products"} className="store-upload-btn" >
+              <Link to={getStoreLink("/products")} className="store-upload-btn">
                 <IconUpload size={20} />
                 <span>Upload a Product</span>
               </Link>
-              <Link to={"/store-dashboard/products"} className="store-add-service-btn" >
+              <Link to={getStoreLink("/products")} className="store-add-service-btn">
                 <IconPlus size={20}/>
                 <span>Add a Service</span>
               </Link>
@@ -145,7 +152,6 @@ const StoreDashboard = () => {
                 </div>
               </div>
             </div>
-
           </div>
 
           {/* Right Column */}
@@ -203,78 +209,81 @@ const StoreDashboard = () => {
                 </div>
               </div>
             </div>
-
-          
           </div>
         </div>
-          {/* Latest Orders */}
-            <div className="store-orders-card">
-              <div className="store-orders-header">
-                <h2>Latest Orders</h2>
-                <Link to="/store-dashboard/orders" className="store-all-orders">All Orders</Link>
-              </div>
-              
-              {/* Filter Buttons */}
-              <div className="store-filter-buttons">
-                <button 
-                  className={`store-filter-btn ${filterStatus === 'All' ? 'store-filter-active' : ''}`}
-                  onClick={() => setFilterStatus('All')}
-                >
-                  All
-                </button>
-                <button 
-                  className={`store-filter-btn ${filterStatus === 'Pending' ? 'store-filter-active' : ''}`}
-                  onClick={() => setFilterStatus('Pending')}
-                >
-                  Pending
-                </button>
-                <button 
-                  className={`store-filter-btn ${filterStatus === 'Completed' ? 'store-filter-active' : ''}`}
-                  onClick={() => setFilterStatus('Completed')}
-                >
-                  Completed
-                </button>
-                <button 
-                  className={`store-filter-btn ${filterStatus === 'Cancelled' ? 'store-filter-active' : ''}`}
-                  onClick={() => setFilterStatus('Cancelled')}
-                >
-                  Cancelled
-                </button>
-              </div>
 
-              <div className="store-orders-table">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>S/N</th>
-                      <th>ORDERS</th>
-                      <th>PRODUCT CODE</th>
-                      <th>QUANTITY</th>
-                      <th>AMOUNT</th>
-                      <th>CLIENT NAME</th>
-                      <th>DATE/TIME</th>
-                      <th>STATUS</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredOrders.map((order, index) => (
-                      <tr key={order.id}>
-                        <td data-label="S/N">{index + 1}</td>
-                        <td data-label="Orders">{order.product}</td>
-                        <td data-label="Product Code">{order.productCode}</td>
-                        <td data-label="Quantity">{order.quantity}</td>
-                        <td data-label="Amount">{order.amount}</td>
-                        <td data-label="Client Name">{order.client}</td>
-                        <td data-label="Date/Time">{order.date}</td>
-                        <td data-label="Status">
-                          <span className={`store-status-${order.status.toLowerCase()}`}>{order.status}</span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+        {/* Latest Orders */}
+        <div className="store-orders-card">
+          <div className="store-orders-header">
+            <h2>Latest Orders</h2>
+            <Link to={getStoreLink("/orders")} className="store-all-orders">
+              All Orders
+            </Link>
+          </div>
+          
+          {/* Filter Buttons */}
+          <div className="store-filter-buttons">
+            <button 
+              className={`store-filter-btn ${filterStatus === 'All' ? 'store-filter-active' : ''}`}
+              onClick={() => setFilterStatus('All')}
+            >
+              All
+            </button>
+            <button 
+              className={`store-filter-btn ${filterStatus === 'Pending' ? 'store-filter-active' : ''}`}
+              onClick={() => setFilterStatus('Pending')}
+            >
+              Pending
+            </button>
+            <button 
+              className={`store-filter-btn ${filterStatus === 'Completed' ? 'store-filter-active' : ''}`}
+              onClick={() => setFilterStatus('Completed')}
+            >
+              Completed
+            </button>
+            <button 
+              className={`store-filter-btn ${filterStatus === 'Cancelled' ? 'store-filter-active' : ''}`}
+              onClick={() => setFilterStatus('Cancelled')}
+            >
+              Cancelled
+            </button>
+          </div>
+
+          <div className="store-orders-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>S/N</th>
+                  <th>ORDERS</th>
+                  <th>PRODUCT CODE</th>
+                  <th>QUANTITY</th>
+                  <th>AMOUNT</th>
+                  <th>CLIENT NAME</th>
+                  <th>DATE/TIME</th>
+                  <th>STATUS</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredOrders.map((order, index) => (
+                  <tr key={order.id}>
+                    <td data-label="S/N">{index + 1}</td>
+                    <td data-label="Orders">{order.product}</td>
+                    <td data-label="Product Code">{order.productCode}</td>
+                    <td data-label="Quantity">{order.quantity}</td>
+                    <td data-label="Amount">{order.amount}</td>
+                    <td data-label="Client Name">{order.client}</td>
+                    <td data-label="Date/Time">{order.date}</td>
+                    <td data-label="Status">
+                      <span className={`store-status-${order.status.toLowerCase()}`}>
+                        {order.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </>
   );

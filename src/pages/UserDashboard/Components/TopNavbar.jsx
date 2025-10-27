@@ -8,11 +8,26 @@ import {
   CheckCircleIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
-import { IconClipboardSmile, IconCopy } from '@tabler/icons-react';
+import { IconBuildingStore, IconClipboardSmile, IconCopy } from '@tabler/icons-react';
+import StoreSelectionModal from './StoreSelectionModal';
+import { useNavigate } from 'react-router-dom';
 
 export default function TopNavbar() {
   const [searchFocus, setSearchFocus] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
+  const [storeModalOpen, setStoreModalOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleStoreSelect = (storeId) => {
+    if (storeId === 'create') {
+      // Navigate to create store page
+      navigate('/store-dashboard/create');
+    } else {
+      // Navigate to the selected store's dashboard
+      navigate(`/store-dashboard/${storeId}`);
+    }
+    setStoreModalOpen(false);
+  };
 
   const notifications = [
     {
@@ -57,8 +72,6 @@ export default function TopNavbar() {
 
   return (
     <>
-
-
       <div className="emk-topnav">
         {/* Left Section */}
         <div className="emk-topnav-left">
@@ -66,20 +79,21 @@ export default function TopNavbar() {
             <button className="emk-referal-btn">
               Referal Link
             </button>
-            <input type="text"disabled className='emk-referal-input' value="https://pricetag.ng/c/67d859bc-b2b4..." />
+            <input type="text" disabled className='emk-referal-input' value="https://pricetag.ng/c/67d859bc-b2b4..." />
             <div className="emk-copy-icon">
               <IconClipboardSmile size={20}/>
             </div>
-
           </div>
-
         </div>
 
-
         <div className="emk-topnav-right">
-          <button className='custom-btn-border-color emk-shop-btn' aria-label="My Shop">
-            <ShoppingCartIcon className="emk-shop-icon" />
-            My Shop
+          <button 
+            className='custom-btn-border-color emk-shop-btn' 
+            aria-label="My Shop"
+            onClick={() => setStoreModalOpen(true)}
+          >
+            <IconBuildingStore className="emk-shop-icon" />
+            My Store
           </button>
 
           <button className="emk-icon-button">
@@ -142,6 +156,13 @@ export default function TopNavbar() {
           </button>
         </div>
       </div>
+
+      {/* Store Selection Modal */}
+      <StoreSelectionModal
+        isOpen={storeModalOpen}
+        onClose={() => setStoreModalOpen(false)}
+        onSelectStore={handleStoreSelect}
+      />
     </>
   );
 }
