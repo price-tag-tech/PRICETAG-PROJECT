@@ -1,9 +1,14 @@
 import React from 'react';
-import { IconSearch, IconLogout, IconDots } from '@tabler/icons-react';
+import { IconSearch, IconLogout, IconDots, IconX, IconMenu2 } from '@tabler/icons-react';
 
-const StoreTopBar = () => {
+const StoreTopBar = ({ onMenuClick }) => {
   return (
     <div className="emk-topnav">
+      {/* Menu Button for Mobile */}
+      <div className="close-btn-emk" onClick={onMenuClick}>
+        <IconMenu2 size={20} /> 
+      </div>
+
       {/* Search Bar */}
       <div className="store-search-container">
         <IconSearch size={20} className="store-search-icon" />
@@ -16,25 +21,6 @@ const StoreTopBar = () => {
 
       {/* Right Section */}
       <div className="store-topbar-right">
-        {/* Reviews */}
-        <div className="store-reviews">
-          <span className="store-reviews-label">Customers Reviews</span>
-          <div className="store-reviews-rating">
-            <span className="store-rating-number">4.3</span>
-            <div className="store-stars">
-              <span className="store-star store-star-filled">★</span>
-              <span className="store-star store-star-filled">★</span>
-              <span className="store-star store-star-filled">★</span>
-              <span className="store-star">★</span>
-              <span className="store-star">★</span>
-            </div>
-            <span className="store-review-count">(10 Reviews)</span>
-          </div>
-        </div>
-
-        {/* Manage Reviews Button */}
-        <button className="store-manage-btn">Manage Reviews</button>
-
         {/* Logout Button */}
         <button className="store-logout-btn">
           <IconLogout size={18} />

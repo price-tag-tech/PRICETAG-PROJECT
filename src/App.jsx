@@ -9,15 +9,15 @@ import StoreLayout from './pages/Store/mystorelayout';
 function App() {
 
   return (
-  <div className='App'>
-    <ScrollToTop />
-       <Routes>
+    <div className='App'>
+      <ScrollToTop />
+      <Routes>
         <Route path="/*" element={<Landingpage />} />
         <Route path="/admin/*" element={<Admin />} />
         <Route path="/user-dashboard/*" element={<UserDashboard />} />
-        <Route path="/store/*" element={<StoreLayout />} />
+        <Route path="/store-dashboard/*" element={<StoreLayout />} />
       </Routes>
-  </div>
+    </div>
   )
 }
 

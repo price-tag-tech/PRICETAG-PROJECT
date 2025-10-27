@@ -1,9 +1,10 @@
 import { IconDots, IconPlus, IconUpload } from '@tabler/icons-react';
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const StoreDashboard = () => {
   const [filterStatus, setFilterStatus] = useState('All');
-
+  const Navigate =  useNavigate();
   const salesData = [
     { day: 'Monday', value: 350000 },
     { day: 'Tuesday', value: 200000 },
@@ -93,14 +94,12 @@ const StoreDashboard = () => {
         {/* Welcome Header */}
         <div className="store-welcome">
           <div>
-            <h1 className="store-welcome-title">Welcome Bank!</h1>
+            <h1 className="store-welcome-title">Welcome Back!</h1>
             <span className="store-member-since">Member since 3rd May, 2015</span>
           </div>
           <div className="store-actions">
-            <button className="store-customize-btn">Customize Store</button>
-            <button className="store-more-btn">
-              <IconDots size={20} />
-            </button>
+            <Link to={"/store-dashboard/profile"} className="store-customize-btn">Customize Store</Link>
+           
           </div>
         </div>
 
@@ -110,14 +109,14 @@ const StoreDashboard = () => {
           <div className="store-left-column">
             {/* Action Buttons */}
             <div className="store-action-buttons">
-              <button className="store-upload-btn">
+              <Link to={"/store-dashboard/products"} className="store-upload-btn" >
                 <IconUpload size={20} />
                 <span>Upload a Product</span>
-              </button>
-              <button className="store-add-service-btn">
+              </Link>
+              <Link to={"/store-dashboard/products"} className="store-add-service-btn" >
                 <IconPlus size={20}/>
                 <span>Add a Service</span>
-              </button>
+              </Link>
             </div>
 
             {/* Stats Cards */}
@@ -147,19 +146,6 @@ const StoreDashboard = () => {
               </div>
             </div>
 
-            {/* Sales Stats */}
-            {/* <div className="store-sales-stats">
-              <h2 className="store-sales-title">Number of Sales</h2>
-              <div className="store-sales-number">180.42K</div>
-              <div className="store-delivery-info">
-                <span className="store-delivery-label">delivery rate:</span>
-                <div className="store-delivery-bar">
-                  <div className="store-delivery-fill" style={{width: '90%'}}></div>
-                </div>
-                <span className="store-delivery-percent">90%</span>
-              </div>
-              <p className="store-sales-subtitle">Successful sales</p>
-            </div> */}
           </div>
 
           {/* Right Column */}
@@ -225,7 +211,7 @@ const StoreDashboard = () => {
             <div className="store-orders-card">
               <div className="store-orders-header">
                 <h2>Latest Orders</h2>
-                <a href="/store/orders" className="store-all-orders">All Orders</a>
+                <Link to="/store-dashboard/orders" className="store-all-orders">All Orders</Link>
               </div>
               
               {/* Filter Buttons */}

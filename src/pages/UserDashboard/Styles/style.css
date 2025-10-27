@@ -51,6 +51,9 @@
     padding-bottom: 0;
     border-bottom: 1px solid #eee;
     padding-left: 25px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .emk-logo-icon {
@@ -270,6 +273,28 @@
     height: 18px;
 }
 
+
+@media screen and (max-width: 1000px) {
+    .emk-sidebar {
+        position: fixed;
+        left: -260px;
+        transition: left 0.3s;
+        z-index: 100;
+        overflow-y: scroll;
+        
+    }
+
+    .emk-sidebar.open {
+        left: 0;
+        width: 100%;
+    }
+
+    .main-dashboard {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+}
 
 /* Top Bar Styles */
 /* Top Bar Styles */
@@ -639,7 +664,16 @@
 }
 
 
-
+@media screen and (max-width: 600px) {
+    .emk-notification-dropdown {
+        right: 10px;
+        width: calc(100vw - 20px);
+    }
+    .emk-topnav{
+        padding: 10px 16px;
+    }
+    
+}
 
 
 

@@ -1,33 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import StoreDashboard from './pages/StoreDashboard';
 import StoreSidebar from './components/sideNavbarStor';
 import StoreTopBar from './components/topnavbarStore';
 import "./css/style.css"
+import ProductsServicesPage from './pages/PoductsAndServices';
+import OrdersPage from './pages/Orders';
+import InventoryPage from './pages/Inventory';
+import CustomersPage from './pages/Customers';
+import StoreProfilePage from './pages/StoreProfile';
 
 const StoreLayout = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
   return (
     <div className="dashboard-body">
       <div className="dashboard-grid">
-        <StoreSidebar />
+        <StoreSidebar isOpen={sidebarOpen} onClose={closeSidebar} />
         <div className="main-dashboard">
-          <StoreTopBar />
+          <StoreTopBar onMenuClick={toggleSidebar} />
           <div className="body-dash">
             <Routes>
               <Route path="/" element={<StoreDashboard />} />
-              <Route path="/products" element={<div>Products Page</div>} />
-              <Route path="/orders" element={<div>Orders Page</div>} />
-              <Route path="/inventory" element={<div>Inventory Page</div>} />
-              <Route path="/customers" element={<div>Customers Page</div>} />
-              <Route path="/messages" element={<div>Messages Page</div>} />
-              <Route path="/profile" element={<div>Profile Page</div>} />
+              <Route path="/products" element={<ProductsServicesPage />} />
+              <Route path="/orders" element={<OrdersPage />} />
+              <Route path="/inventory" element={<InventoryPage/>} />
+              <Route path="/customers" element={<CustomersPage/>} />
+              
+              <Route path="/profile" element={<StoreProfilePage/>} />
             </Routes>
           </div>
         </div>
       </div>
+      
+    
     </div>
   );
 };
-
 
 export default StoreLayout;
