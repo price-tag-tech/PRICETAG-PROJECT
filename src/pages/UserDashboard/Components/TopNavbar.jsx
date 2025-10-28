@@ -8,11 +8,11 @@ import {
   CheckCircleIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
-import { IconBuildingStore, IconClipboardSmile, IconCopy } from '@tabler/icons-react';
+import { IconBuildingStore, IconClipboardSmile, IconCopy, IconMenu3, IconMenu4 } from '@tabler/icons-react';
 import StoreSelectionModal from './StoreSelectionModal';
 import { useNavigate } from 'react-router-dom';
 
-export default function TopNavbar() {
+export default function TopNavbar({ onToggleSidebar, isSidebarOpen }) {
   const [searchFocus, setSearchFocus] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [storeModalOpen, setStoreModalOpen] = useState(false);
@@ -75,29 +75,31 @@ export default function TopNavbar() {
       <div className="emk-topnav">
         {/* Left Section */}
         <div className="emk-topnav-left">
+          <div 
+            className="close-btn-emk" 
+            onClick={onToggleSidebar}
+          >
+            {isSidebarOpen ? <IconMenu4 size={20} /> : <IconMenu3 size={20} />}
+          </div>
           <div className="emk-referla-link">
             <button className="emk-referal-btn">
               Referal Link
             </button>
             <input type="text" disabled className='emk-referal-input' value="https://pricetag.ng/c/67d859bc-b2b4..." />
             <div className="emk-copy-icon">
-              <IconClipboardSmile size={20}/>
+              <IconClipboardSmile size={20} />
             </div>
           </div>
         </div>
 
         <div className="emk-topnav-right">
-          <button 
-            className='custom-btn-border-color emk-shop-btn' 
+          <button
+            className='custom-btn-border-color emk-shop-btn'
             aria-label="My Shop"
             onClick={() => setStoreModalOpen(true)}
           >
             <IconBuildingStore className="emk-shop-icon" />
             My Store
-          </button>
-
-          <button className="emk-icon-button">
-            <QuestionMarkCircleIcon className="emk-icon-button-icon" />
           </button>
 
           <div className="emk-notification-wrapper">
@@ -148,7 +150,7 @@ export default function TopNavbar() {
           </div>
 
           <button className="emk-profile-button">
-            <img
+            <img 
               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
               alt="Profile"
               className="emk-profile-image"

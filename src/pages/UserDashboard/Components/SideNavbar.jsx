@@ -15,13 +15,14 @@ import {
   ArrowDownLeftIcon,
   ArrowLeftIcon
 } from '@heroicons/react/24/outline';
-import { Link, useLocation } from 'react-router-dom'; // Added useLocation
+import { Link, useLocation } from 'react-router-dom';
 import Logo from "../../../assets/images/logo.png"
+import { IconBuildingStore, IconX } from '@tabler/icons-react';
 
-export default function SideNavbar() {
+export default function SideNavbar({ isOpen, onClose }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileRef = useRef(null);
-  const location = useLocation(); // Get current location
+  const location = useLocation();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -39,14 +40,12 @@ export default function SideNavbar() {
   const mainMenuItems = [
     { id: 'overview', label: 'Overview', icon: HomeIcon, path: '/user-dashboard/overview' },
     { id: 'orders', label: 'Orders and Purchases', icon: ShoppingCartIcon, path: '/user-dashboard/orders' },
-    // { id: 'messages', label: 'Messages', icon: ChatBubbleLeftIcon, path: '/user-dashboard/messages', badge: 20 },
-    // { id: 'products', label: 'Products', icon: CubeIcon, path: '/user-dashboard/products' },
     { id: 'affiliate', label: 'Affiliate Earnings', icon: ArrowTrendingUpIcon, path: '/user-dashboard/affiliate' },
     { id: 'notifications', label: 'Notifications', icon: BellIcon, path: '/user-dashboard/notifications' },
     { id: 'settings', label: 'Profile Settings', icon: Cog6ToothIcon, path: '/user-dashboard/settings' },
+    
   ];
 
-  //function to check if a menu item is active
   const isMenuItemActive = (itemPath) => {
     return location.pathname === itemPath || 
            (itemPath === '/user-dashboard/overview' && location.pathname === '/user-dashboard');
@@ -57,12 +56,15 @@ export default function SideNavbar() {
   };
 
   return (
-    <div className="emk-sidebar">
+    <div className={`emk-sidebar ${isOpen ? 'open' : ''}`}>
       {/* Logo Header */}
       <div className="emk-logo-header">
         <Link to="/user-dashboard" className="emk-logo-icon">
           <img src={Logo} alt="" />
         </Link>
+        <div className="close-btn-emk" onClick={onClose}>
+          <IconX size={20} /> 
+        </div>
       </div>
 
       {/* Menu Content */}
@@ -83,6 +85,7 @@ export default function SideNavbar() {
                   key={item.id}
                   to={item.path}
                   className={`emk-menu-item ${isActive ? 'emk-menu-item-active' : ''}`}
+                  onClick={onClose} // Close sidebar when menu item is clicked on mobile
                 >
                   <Icon className="emk-menu-icon" />
                   <span className="emk-menu-label">{item.label}</span>
@@ -99,18 +102,14 @@ export default function SideNavbar() {
       {/* Profile Section */}
       <div className="emk-profile-section" ref={profileRef}>
         <div className={`emk-profile-dropdown ${isProfileOpen ? 'emk-profile-dropdown-open' : ''}`}>
-          <Link 
-            to="/user-dashboard/profile" 
-            className="emk-dropdown-item" 
-            onClick={handleDropdownItemClick}
-          >
-            <UserIcon className="emk-dropdown-icon" />
-            <span>My Profile</span>
-          </Link>
+          
           <Link 
             to="/user-dashboard/settings" 
             className="emk-dropdown-item" 
-            onClick={handleDropdownItemClick}
+            onClick={() => {
+              handleDropdownItemClick();
+              onClose();
+            }}
           >
             <Cog6ToothIcon className="emk-dropdown-icon" />
             <span>Account Settings</span>

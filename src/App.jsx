@@ -6,6 +6,7 @@ import Landingpage from './pages/Landingpage/Landingpage';
 import Admin from './pages/Admin/Admin';
 import UserDashboard from './pages/UserDashboard/UserDashboard';
 import StoreLayout from './pages/Store/mystorelayout';
+import CreateStorePage from './pages/UserDashboard/Pages/CreateStore';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/user-dashboard/*" element={<UserDashboard />} />
         <Route path="/store-dashboard/*" element={<StoreLayout />} />
         <Route path="/store-dashboard/:storeId/*" element={<StoreLayout />} />
+     
       </Routes>
     </div>
   )
