@@ -11,6 +11,7 @@ import {
   Bars3BottomRightIcon,
   StarIcon,
   XMarkIcon,
+  Squares2X2Icon,
 } from '@heroicons/react/24/outline';
 
 import Product1 from '../../../../assets/images/Store/Products/1.jpg';
@@ -62,9 +63,12 @@ const Products = () => {
   const [cities, setCities] = useState([]);
   const [isFetchingCities, setIsFetchingCities] = useState(false);
   const [verifiedFilter, setVerifiedFilter] = useState('all'); // 'all', 'verified', 'unverified'
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('All Categories');
 
   const sortRef = useRef(null);
   const locationRef = useRef(null);
+  const categoriesRef = useRef(null);
 
   const containerVariants = {
     open: { 
@@ -193,6 +197,20 @@ const Products = () => {
 
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [locationOpen]);
+
+  useEffect(() => {
+    if (!isCategoriesOpen) return;
+
+    const handleClickOutside = (event) => {
+      if (categoriesRef.current && !categoriesRef.current.contains(event.target)) {
+        setIsCategoriesOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isCategoriesOpen]);
 
   const handleStateSelect = async (state) => {
     setSelectedState(state);
@@ -509,10 +527,30 @@ const Products = () => {
     }, 1000);
   };
 
+  const categories = [
+    'All Categories',
+    'Vehicles',
+    'Property',
+    'Mobile Phones & Tablets',
+    'Electronics',
+    'Home, Furniture & Appliances',
+    'Fashion',
+    'Beauty & Personal Care',
+    'Services',
+    'Repair & Construction',
+    'Commercial Equipment & Tools',
+    'Leisure & Activities',
+    'Babies & Kids',
+    'Food, Agriculture & Farming',
+    'Animals & Pets',
+    'Jobs',
+    'Seeking Work - CVs'
+  ];
+
   return (
-    <div className="ProdcO-Page">
+    <div className="ProdcO-Page forOthernPag">
         <div className="custom-container">
-    <div className={`Genrg-ProuctPG ${isShrunk ? 'ShrinkSec' : ''}`}>
+    <div className={`Genrg-ProuctPG GTha-AUhsms ${isShrunk ? 'ShrinkSec' : ''}`}>
       <div className="Mobill-Boody-Oak" onClick={() => setIsShrunk(!isShrunk)} />
        <div className="Genrg-ProuctPG-1">
         <div className="FLG-Top">
@@ -686,7 +724,7 @@ const Products = () => {
         </div>
         
        </div>
-       <div className="Genrg-ProuctPG-2">
+<div className="Genrg-ProuctPG-2">
       <div className="Prodc-Sec-TOp GGba-TTop">
         <h3 className="mid-text">
           <span onClick={() => setIsShrunk(!isShrunk)}>
@@ -694,7 +732,41 @@ const Products = () => {
           </span> 
           Products
         </h3>
-          <div ref={sortRef}>
+        <div className="Sttore-TToP-2">
+          <div ref={categoriesRef} className="SoRts-Sec" onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}>
+            <p>Categories:</p>
+            <button>
+              <Squares2X2Icon  />
+              <span className="spannhsns-OLs">{selectedCategory}</span>
+            </button>
+            <motion.div 
+              className="Prodct-Gen-DropDown"
+              variants={containerVariants}
+              initial={false}
+              animate={isCategoriesOpen ? "open" : "closed"}
+              style={{ 
+                originY: 0, 
+                overflow: "hidden",
+                pointerEvents: isCategoriesOpen ? 'auto' : 'none'
+              }}
+            >
+              <div className="Gen-DropDown-Main UUJ-Carrts custom-scroll-bar">
+                {categories.map((cat, index) => (
+                  <span 
+                    key={index} 
+                    onClick={(e) => { 
+                      e.stopPropagation(); 
+                      setSelectedCategory(cat); 
+                      setIsCategoriesOpen(false); 
+                    }}
+                  >
+                    {cat}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+          <div ref={sortRef} className="Ngalla-Op">
         <div className="SoRts-Sec" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
           <p>Sort by:</p>
             <button>
@@ -720,6 +792,7 @@ const Products = () => {
               </div>
             </motion.div>
           </div>
+        </div>
         </div>
       </div>
       <div className='Prodc-Sec-Main'>
@@ -797,7 +870,7 @@ const Products = () => {
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                }}
+                }}       
               >
                 <XMarkIcon />
               </button>
