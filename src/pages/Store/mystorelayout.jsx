@@ -10,6 +10,8 @@ import OrdersPage from './pages/Orders';
 import InventoryPage from './pages/Inventory';
 import CustomersPage from './pages/Customers';
 import StoreProfilePage from './pages/StoreProfile';
+import StoreDisputesPage from './pages/StoreDispute';
+import StoreDisputeDetailPage from './pages/StoreDisputeDetails';
 
 const StoreLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -29,22 +31,24 @@ const StoreLayout = () => {
         <StoreSidebar 
           isOpen={sidebarOpen} 
           onClose={closeSidebar} 
-          storeId={storeId} // Pass storeId to sidebar
+          storeId={storeId}
         />
         <div className="main-dashboard">
           <StoreTopBar 
             onMenuClick={toggleSidebar} 
-            storeId={storeId} // Pass storeId to topbar
+            storeId={storeId}
           />
           <div className="body-dash">
             <Routes>
-              <Route path="/" element={<StoreDashboard storeId={storeId} />} />
-              <Route path="/:storeId" element={<StoreDashboard storeId={storeId} />} />
-              <Route path="/products" element={<ProductsServicesPage storeId={storeId} />} />
-              <Route path="/orders" element={<OrdersPage storeId={storeId} />} />
-              <Route path="/inventory" element={<InventoryPage storeId={storeId} />} />
-              <Route path="/customers" element={<CustomersPage storeId={storeId} />} />
-              <Route path="/profile" element={<StoreProfilePage storeId={storeId} />} />
+              {/* Remove the duplicate storeId route */}
+              <Route index element={<StoreDashboard storeId={storeId} />} />
+              <Route path="products" element={<ProductsServicesPage storeId={storeId} />} />
+              <Route path="orders" element={<OrdersPage storeId={storeId} />} />
+              <Route path="inventory" element={<InventoryPage storeId={storeId} />} />
+              <Route path="customers" element={<CustomersPage storeId={storeId} />} />
+              <Route path="profile" element={<StoreProfilePage storeId={storeId} />} />
+              <Route path="disputes" element={<StoreDisputesPage storeId={storeId} />} />
+              <Route path="disputes/:Id" element={<StoreDisputeDetailPage storeId={storeId} />} />
             </Routes>
           </div>
         </div>

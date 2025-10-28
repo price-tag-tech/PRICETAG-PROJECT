@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   MagnifyingGlassIcon,
   QuestionMarkCircleIcon,
@@ -10,13 +10,30 @@ import {
 } from '@heroicons/react/24/outline';
 import { IconBuildingStore, IconClipboardSmile, IconCopy, IconMenu3, IconMenu4 } from '@tabler/icons-react';
 import StoreSelectionModal from './StoreSelectionModal';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function TopNavbar({ onToggleSidebar, isSidebarOpen }) {
   const [searchFocus, setSearchFocus] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [storeModalOpen, setStoreModalOpen] = useState(false);
   const navigate = useNavigate();
+  
+  // Create a ref for the notification dropdown
+  const notificationRef = useRef(null);
+
+  // Handle click outside to close notification dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+        setNotificationOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleStoreSelect = (storeId) => {
     if (storeId === 'create') {
@@ -27,6 +44,11 @@ export default function TopNavbar({ onToggleSidebar, isSidebarOpen }) {
       navigate(`/store-dashboard/${storeId}`);
     }
     setStoreModalOpen(false);
+  };
+
+  const handleViewAllNotifications = () => {
+    setNotificationOpen(false);
+    navigate('/user-dashboard/notifications');
   };
 
   const notifications = [
@@ -102,7 +124,7 @@ export default function TopNavbar({ onToggleSidebar, isSidebarOpen }) {
             My Store
           </button>
 
-          <div className="emk-notification-wrapper">
+          <div className="emk-notification-wrapper" ref={notificationRef}>
             <button
               className="emk-icon-button"
               onClick={() => setNotificationOpen(!notificationOpen)}
@@ -144,7 +166,12 @@ export default function TopNavbar({ onToggleSidebar, isSidebarOpen }) {
               </div>
 
               <div className="emk-notification-footer">
-                <button className="emk-view-all">View All Notifications</button>
+                <button 
+                  onClick={handleViewAllNotifications}
+                  className="emk-view-all"
+                >
+                  View All Notifications
+                </button>
               </div>
             </div>
           </div>
