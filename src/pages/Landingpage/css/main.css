@@ -3176,3 +3176,112 @@ position: relative;
     transition: all 0.3s ease-in-out;
     min-height:40px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.leaflet-container {
+ height: calc(100% - 60px) !important;
+  width: 100% !important;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+
+.leaflet-control-attribution {
+  display: none !important;
+}
+
+/* Ensure map fits properly */
+.leaflet-map-pane {
+  z-index: 1;
+}
+
+.Mappg-Modal .modal-body{
+    height:90vh;
+    padding: 0px !important;
+}
+
+.MMaps-DLys{
+    position: relative;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 13px;
+}
+
+.MMaps-DLys p{
+  border: 1px solid #ededed;
+  box-shadow: 0 8px 8px 0 rgba(25, 25, 25, .04);
+  -webkit-box-shadow: 0 8px 8px 0 rgba(25, 25, 25, .04);
+  -moz-box-shadow: 0 8px 8px 0 rgba(25, 25, 25, .04);
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 8px 10px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap:5px;
+}
+.MMaps-DLys p span{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.MMaps-DLys p span svg{
+    width: 20px;
+    color: #10b981;
+}
+
+.MMaps-DLys p b{
+    font-weight: 600;
+}
+
+@media screen and (max-width:600px){
+    .MMaps-DLys{
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+    }
+
+    .MMaps-DLys p{
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width:350px){
+    .MMaps-DLys p span span{
+        display: none !important;
+    }
+    .MMaps-DLys p span svg{
+        width: 15px !important;
+    }
+}
+
+
+.FUll-Address{
+    position: relative;
+    font-size: 13px;
+    padding: 0px 20px;
+    margin-bottom: 20px;
+}
+
+.FUll-Address p{
+    color: #808080;
+}

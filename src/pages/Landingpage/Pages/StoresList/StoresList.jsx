@@ -26,6 +26,8 @@ const stores = [
     ownerImg: StoreOwner1,
     owner: 'Mary Jane',
     location: 'Lagos State, Ikeja',
+    lat: 6.6018,
+    lng: 3.3515,
     products: 300,
     services: 3,
     memberSince: '10th Jan, 2023',
@@ -39,6 +41,8 @@ const stores = [
     ownerImg: StoreOwner2,
     owner: 'Samuel Bright',
     location: 'FCT - Abuja, Wuse',
+    lat: 9.0765,
+    lng: 7.3986,
     products: 520,
     services: 6,
     memberSince: '25th Mar, 2022',
@@ -52,6 +56,8 @@ const stores = [
     ownerImg: StoreOwner3,
     owner: 'Isabella Cruz',
     location: 'Rivers State, Port Harcourt',
+    lat: 4.8156,
+    lng: 7.0498,
     products: 150,
     services: 4,
     memberSince: '18th Jul, 2023',
@@ -65,6 +71,8 @@ const stores = [
     ownerImg: StoreOwner4,
     owner: 'David Green',
     location: 'Oyo State, Ibadan',
+    lat: 7.3775,
+    lng: 3.9059,
     products: 220,
     services: 2,
     memberSince: '2nd Dec, 2021',
@@ -78,6 +86,8 @@ const stores = [
     ownerImg: StoreOwner5,
     owner: 'Sophia Turner',
     location: 'Delta State, Asaba',
+    lat: 6.1982,
+    lng: 6.7317,
     products: 410,
     services: 5,
     memberSince: '9th Feb, 2024',
@@ -91,6 +101,8 @@ const stores = [
     ownerImg: StoreOwner6,
     owner: 'Michael Adams',
     location: 'Kano State, Kano',
+    lat: 12.0001,
+    lng: 8.5167,
     products: 340,
     services: 3,
     memberSince: '1st May, 2023',
@@ -108,6 +120,8 @@ const StoresList = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState('Most Popular');
   const [currentLocation, setCurrentLocation] = useState('Loading...');
+  const [userLat, setUserLat] = useState(null);
+  const [userLng, setUserLng] = useState(null);
   const [locationOpen, setLocationOpen] = useState(false);
   const [states, setStates] = useState([]);
   const [showCitiesModal, setShowCitiesModal] = useState(false);
@@ -134,6 +148,20 @@ const StoresList = () => {
         ease: "easeInOut"
       }
     }
+  };
+
+  // Haversine formula to calculate distance
+  const calculateDistance = (lat1, lng1, lat2, lng2) => {
+    const R = 6371; // Earth's radius in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = 
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+      Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+    return Math.round(distance);
   };
 
   // Fetch Nigerian states from API
@@ -175,6 +203,8 @@ const StoresList = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
+          setUserLat(latitude);
+          setUserLng(longitude);
           fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
             .then(res => res.json())
             .then(data => {
@@ -256,6 +286,8 @@ const StoresList = () => {
   const handleCitySelect = (city) => {
     const stateName = selectedState.replace(' State', '');
     setCurrentLocation(`${stateName}, ${city}`);
+    // Optionally update userLat and userLng if needed, but since it's manual, might need geocoding
+    // For simplicity, keeping as is; distance calculation uses stored coords
     setShowCitiesModal(false);
   };
 
@@ -267,6 +299,11 @@ const StoresList = () => {
   const parseDate = (dateStr) => {
     const cleanedStr = dateStr.replace(/(\d+)(st|nd|rd|th)/, '$1');
     return new Date(cleanedStr);
+  };
+
+  const getStoreId = (name, id) => {
+    const initials = name.split(' ').map(word => word.charAt(0).toUpperCase()).join('');
+    return `${initials}PT${String(id).padStart(3, '0')}`;
   };
 
   const sortedStores = useMemo(() => {
@@ -367,56 +404,69 @@ const StoresList = () => {
         </div>
 
         <div className="Gen-Store-Cards">
-          {sortedStores.slice(0, visibleStores).map((store) => (
-            <Link to={`/store/${store.id}`} className="Store-Card" key={store.id} style={{ textDecoration: 'none' }}>
-              <div className="Top-Store-Card">
-                <img src={store.banner} alt={store.name} />
-              </div>
-              <div className="Sub-Store-Card">
-                <h3 className='mid-text'>{store.name}</h3>
-                <ul>
-                  <li>
-                    <span>Owner</span>
-                    <h6>
-                      <span className="ProfIcon">
-                        <img src={store.ownerImg} alt={store.owner} />
-                      </span>
-                      <span className="ProfNamE">
-                        <b>{store.owner}</b>
-                      </span>
-                    </h6>
-                  </li>
-                  <li>
-                    <span>Products</span>
-                    <p>{store.products}</p>
-                  </li>
-                  <li>
-                    <span>Services</span>
-                    <p>{store.services}</p>
-                  </li>
-                  <li>
-                    <span>Location</span>
-                    <p>{store.location}</p>
-                  </li>
-                  <li>
-                    <span>Member Since</span>
-                    <p>{store.memberSince}</p>
-                  </li>
-                </ul>
-                <div className="Foot-Store-Card">
-                  <h4>
-                    <b>
-                      <StarIcon /> {store.rating}
-                    </b>
-                    <span>Reviews: {store.reviews}</span>
-                  </h4>
-                  <h6>
-                    <ArrowRightIcon />
-                  </h6>
+          {sortedStores.slice(0, visibleStores).map((store) => {
+            const storeId = getStoreId(store.name, store.id);
+            const distance = userLat && userLng ? calculateDistance(userLat, userLng, store.lat, store.lng) : 'Unknown';
+            const distanceDisplay = typeof distance === 'number' ? `${distance} km` : distance;
+            return (
+              <Link to={`/store/${store.id}`} className="Store-Card" key={store.id} style={{ textDecoration: 'none' }}>
+                <div className="Top-Store-Card">
+                  <img src={store.banner} alt={store.name} />
                 </div>
-              </div>
-            </Link>
-          ))}
+                <div className="Sub-Store-Card">
+                  <h3 className='mid-text'>{store.name}</h3>
+                  <ul>
+                    <li>
+                      <span>Store ID</span>
+                      <p>{storeId}</p>
+                    </li>
+                    <li>
+                      <span>Owner</span>
+                      <h6>
+                        <span className="ProfIcon">
+                          <img src={store.ownerImg} alt={store.owner} />
+                        </span>
+                        <span className="ProfNamE">
+                          <b>{store.owner}</b>
+                        </span>
+                      </h6>
+                    </li>
+                    <li>
+                      <span>Products</span>
+                      <p>{store.products}</p>
+                    </li>
+                    <li>
+                      <span>Services</span>
+                      <p>{store.services}</p>
+                    </li>
+                    <li>
+                      <span>Location</span>
+                      <p>{store.location}</p>
+                    </li>
+                    <li>
+                      <span>Distance from you</span>
+                      <p>{distanceDisplay}</p>
+                    </li>
+                    <li>
+                      <span>Member Since</span>
+                      <p>{store.memberSince}</p>
+                    </li>
+                  </ul>
+                  <div className="Foot-Store-Card">
+                    <h4>
+                      <b>
+                        <StarIcon /> {store.rating}
+                      </b>
+                      <span>Reviews: {store.reviews}</span>
+                    </h4>
+                    <h6>
+                      <ArrowRightIcon />
+                    </h6>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
 
       {visibleStores < sortedStores.length && (

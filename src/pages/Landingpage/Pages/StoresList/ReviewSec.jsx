@@ -221,7 +221,7 @@ const ReviewSec = ({ store }) => {
                   <option value={4}>4 Stars</option>
                   <option value={5}>5 Stars</option>
                 </select>
-                <p className="text-sm text-gray-500">Select your rating (required)</p>
+                <p>Select your rating (required)</p>
               </div>
               <div className="review-input-group">
                 <label htmlFor="review-comment">Review</label>

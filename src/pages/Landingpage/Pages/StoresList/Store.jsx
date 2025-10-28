@@ -15,12 +15,15 @@ import {
   XMarkIcon,
   Bars3BottomRightIcon,
   Squares2X2Icon,
+  ArrowsRightLeftIcon,
 } from '@heroicons/react/24/outline';
 
 import {
   IconShoppingBag,
   IconBriefcase
 } from '@tabler/icons-react';
+
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import StoreOwner1 from '../../../../assets/images/Store/Owners/1.jpg';
 import StoreOwner2 from '../../../../assets/images/Store/Owners/2.jpg';
@@ -40,6 +43,7 @@ import StoreProducts from './StoreProducts';
 import StoreServices from './StoreServices';
 import ReviewSec from './ReviewSec';
 
+import 'leaflet/dist/leaflet.css';
 
 const stores = [
   {
@@ -49,6 +53,8 @@ const stores = [
     ownerImg: StoreOwner1,
     owner: 'Mary Jane',
     location: 'Lagos State, Ikeja',
+    lat: 6.605874,
+    lng: 3.349149,
     products: 300,
     services: 3,
     memberSince: '10th Jan, 2023',
@@ -62,6 +68,8 @@ const stores = [
     ownerImg: StoreOwner2,
     owner: 'Samuel Bright',
     location: 'FCT - Abuja, Wuse',
+    lat: 9.0747,
+    lng: 7.476,
     products: 520,
     services: 6,
     memberSince: '25th Mar, 2022',
@@ -75,6 +83,8 @@ const stores = [
     ownerImg: StoreOwner3,
     owner: 'Isabella Cruz',
     location: 'Rivers State, Port Harcourt',
+    lat: 4.824167,
+    lng: 7.033611,
     products: 150,
     services: 4,
     memberSince: '18th Jul, 2023',
@@ -88,6 +98,8 @@ const stores = [
     ownerImg: StoreOwner4,
     owner: 'David Green',
     location: 'Oyo State, Ibadan',
+    lat: 7.376736,
+    lng: 3.939786,
     products: 220,
     services: 2,
     memberSince: '2nd Dec, 2021',
@@ -101,6 +113,8 @@ const stores = [
     ownerImg: StoreOwner5,
     owner: 'Sophia Turner',
     location: 'Delta State, Asaba',
+    lat: 6.1982,
+    lng: 6.7321,
     products: 410,
     services: 5,
     memberSince: '9th Feb, 2024',
@@ -114,6 +128,8 @@ const stores = [
     ownerImg: StoreOwner6,
     owner: 'Michael Adams',
     location: 'Kano State, Kano',
+    lat: 12.0000,
+    lng: 8.5167,
     products: 340,
     services: 3,
     memberSince: '1st May, 2023',
@@ -137,10 +153,50 @@ const Store = () => {
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
   const [showShareModal, setShowShareModal] = useState(false);
+  const [showMapModal, setShowMapModal] = useState(false);
+  const [userLat, setUserLat] = useState(null);
+  const [userLng, setUserLng] = useState(null);
 
   const categoriesRef = useRef(null);
 
   const shareLink = `${window.location.origin}/store/${store.id}`;
+
+  const getStoreId = (name, id) => {
+    const initials = name.split(' ').map(word => word.charAt(0).toUpperCase()).join('');
+    return `${initials}PT${String(id).padStart(3, '0')}`;
+  };
+
+  const storeId = getStoreId(store.name, store.id);
+
+  // Haversine formula to calculate distance
+  const calculateDistance = (lat1, lng1, lat2, lng2) => {
+    const R = 6371; // Earth's radius in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = 
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+      Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+    return Math.round(distance);
+  };
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLat(latitude);
+          setUserLng(longitude);
+        },
+        (error) => {
+          console.error('Geolocation error:', error);
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+      );
+    }
+  }, []);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(shareLink).then(() => {
@@ -152,6 +208,14 @@ const Store = () => {
 
   const handleCloseShareModal = () => {
     setShowShareModal(false);
+  };
+
+  const handleMapToggle = () => {
+    setShowMapModal(true);
+  };
+
+  const handleCloseMapModal = () => {
+    setShowMapModal(false);
   };
 
   useEffect(() => {
@@ -287,6 +351,9 @@ const Store = () => {
     );
   }
 
+  const distance = userLat && userLng ? calculateDistance(userLat, userLng, store.lat, store.lng) : 'Unknown';
+  const distanceDisplay = typeof distance === 'number' ? `${distance} km` : distance;
+
   return (
     <div className="Store-Detail-Page">
       <div className="custom-container">
@@ -300,7 +367,7 @@ const Store = () => {
               <div className="rateD-Store-2">
                 <div className="rateD-Store-2-Dlt">
                   <h4>{store.owner}</h4>
-                  <p>{store.location}</p>
+                  <p>Store ID: {storeId}</p>
                 </div>
               </div>
           </div>
@@ -325,7 +392,7 @@ const Store = () => {
               <div className="rateD-Store-2">
                 <div className="rateD-Store-2-Dlt">
                   <h4>{store.owner}</h4>
-                  <p>{store.location}</p>
+                  <p>Store ID: {storeId}</p>
                 </div>
               </div>
           </div>
@@ -340,7 +407,9 @@ const Store = () => {
           <p>Delivering quality products and reliable services designed to exceed your expectations.</p>
           <div className="GGhs-BtnS">
             <button><PhoneIcon /> Contact Store</button>
-            <button className="Store-Map-Btn"><MapPinIcon /> </button>
+            <button className="Store-Map-Btn" onClick={handleMapToggle}>
+              <MapPinIcon /> 
+            </button>
           </div>
           </div>
         </div>
@@ -616,6 +685,59 @@ const Store = () => {
             </div>
           </div>
         </>
+      )}
+
+      {/* Map Modal */}
+      {showMapModal && (
+        <div className="Mappg-Modal">
+          <div 
+            className="modal-backdrop" 
+            onClick={handleCloseMapModal}
+          />
+          <div 
+            className="cities-modal" 
+            onClick={(e) => e.stopPropagation()}
+            style={{ maxWidth: '700px' }}
+          >
+            <div className="modal-header">
+              <h3>Store Location</h3>
+              <button 
+                onClick={handleCloseMapModal}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}       
+              >
+                <XMarkIcon />
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="MMaps-DLys">
+                <p><span><MapPinIcon /> <span>Location:</span></span> <b>{store.location}</b></p>
+                <p><span><ArrowsRightLeftIcon /> <span>Distance from you:</span></span> <b>{distanceDisplay}</b></p>
+              </div>
+              <div className="FUll-Address">
+                <p>No. 15 Umule Road, Near Isi Gate, Umuahia North LGA, Abia State, Nigeria</p>
+              </div>
+              <MapContainer center={[store.lat, store.lng]} zoom={13} attributionControl={false} style={{ height: 'calc(100% - 40px)', width: '100%' }}>
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution=""
+                />
+                <Marker position={[store.lat, store.lng]}>
+                  <Popup>
+                    <div>
+                      <h4>{store.name}</h4>
+                      <p>Location: {store.location}</p>
+                      <p>Distance from you: {distanceDisplay}</p>
+                    </div>
+                  </Popup>
+                </Marker>
+              </MapContainer>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
