@@ -1,6 +1,7 @@
 import { IconDots, IconPlus, IconUpload } from '@tabler/icons-react';
 import React, { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import StoreReviewsSection from '../components/ReviewSection';
 
 const StoreDashboard = () => {
   const [filterStatus, setFilterStatus] = useState('All');
@@ -211,7 +212,8 @@ const StoreDashboard = () => {
             </div>
           </div>
         </div>
-
+        {/* review section */}
+        <StoreReviewsSection/>
         {/* Latest Orders */}
         <div className="store-orders-card">
           <div className="store-orders-header">

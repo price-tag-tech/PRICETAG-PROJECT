@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { IconHome, IconPackage, IconShoppingCart, IconChartBar, IconUsers, IconMessage, IconUser, IconCopy, IconX, IconPlus, IconCheck, IconBuildingStore, IconSettings2, IconSettingsCheck } from '@tabler/icons-react';
+import { IconHome, IconPackage, IconShoppingCart, IconChartBar, IconUsers, IconMessage, IconUser, IconCopy, IconX, IconPlus, IconCheck, IconBuildingStore, IconSettings2, IconSettingsCheck, IconAlertCircle } from '@tabler/icons-react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'; 
 import Logo from "../../../assets/images/logo.png";
 
@@ -51,9 +51,12 @@ const StoreSidebar = ({ isOpen, onClose }) => {
     { path: `/store-dashboard/${storeId || ''}`, icon: IconBuildingStore, label: 'Dashboard' },
     { path: `/store-dashboard/${storeId || ''}/products`, icon: IconPackage, label: 'Products/Services' },
     { path: `/store-dashboard/${storeId || ''}/orders`, icon: IconShoppingCart, label: 'Orders' },
+    { path: `/store-dashboard/${storeId || ''}/disputes`, icon: IconAlertCircle, label: 'Disputes' },
     { path: `/store-dashboard/${storeId || ''}/inventory`, icon: IconChartBar, label: 'Inventory' },
     { path: `/store-dashboard/${storeId || ''}/customers`, icon: IconUsers, label: 'Customers' },
-    { path: `/store-dashboard/${storeId || ''}/profile`, icon: IconSettingsCheck, label: 'Profile' }
+    { path: `/store-dashboard/${storeId || ''}/profile`, icon: IconSettingsCheck, label: 'Profile' },
+    
+
   ];
 
   const isActive = (path) => {
@@ -219,7 +222,7 @@ const StoreSidebar = ({ isOpen, onClose }) => {
       </div>
 
       {/* Referral Link */}
-      <div className="store-referral">
+      {/* <div className="store-referral">
         <span className="store-referral-label">Referral Link</span>
         <div className="store-referral-input">
           <span className="store-referral-text">{activeStore.referralLink.substring(0, 20)}...</span>
@@ -227,7 +230,7 @@ const StoreSidebar = ({ isOpen, onClose }) => {
             <IconCopy size={16} />
           </button>
         </div>
-      </div>
+      </div> */}
 
       {/* Navigation Menu */}
       <nav className="store-nav">

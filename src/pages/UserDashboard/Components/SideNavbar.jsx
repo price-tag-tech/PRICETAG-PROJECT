@@ -17,7 +17,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from "../../../assets/images/logo.png"
-import { IconBuildingStore, IconX } from '@tabler/icons-react';
+import { IconAlertCircle, IconBuildingStore, IconX } from '@tabler/icons-react';
 
 export default function SideNavbar({ isOpen, onClose }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -43,10 +43,16 @@ export default function SideNavbar({ isOpen, onClose }) {
     { id: 'affiliate', label: 'Affiliate Earnings', icon: ArrowTrendingUpIcon, path: '/user-dashboard/affiliate' },
     { id: 'notifications', label: 'Notifications', icon: BellIcon, path: '/user-dashboard/notifications' },
     { id: 'settings', label: 'Profile Settings', icon: Cog6ToothIcon, path: '/user-dashboard/settings' },
-    
+    { id: 'disputes', label: 'Dispute Resolution', icon: IconAlertCircle, path: '/user-dashboard/disputes' }
   ];
 
   const isMenuItemActive = (itemPath) => {
+    // For dispute menu item, check if pathname starts with dispute path
+    if (itemPath === '/user-dashboard/disputes') {
+      return location.pathname.startsWith('/user-dashboard/disputes');
+    }
+    
+    // For other menu items, check exact match or overview special case
     return location.pathname === itemPath || 
            (itemPath === '/user-dashboard/overview' && location.pathname === '/user-dashboard');
   };

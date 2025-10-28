@@ -10,6 +10,9 @@ import Notifications from "./Pages/notification";
 import ProfileSettings from "./Pages/ProfileSettings";
 import { useState } from "react";
 import CreateStorePage from "./Pages/CreateStore";
+import DisputeResolution from "./Components/disputeComponent";
+import DisputesPage from "./Pages/Dispute";
+import DisputeDetailPage from "./Pages/DisputeDetails";
 
 const UserDashboard = () => {
   useDocumentTitle("Dashboard");
@@ -46,9 +49,14 @@ const UserDashboard = () => {
               <Route path="/notifications" element={<Notifications/>} />
               <Route path="/settings" element={<ProfileSettings/>} />
               <Route path="/create-store" element={<CreateStorePage/>} />
+              <Route path="/disputes" element={<DisputesPage />} />
+              <Route path="/disputes/:id" element={<DisputeDetailPage />} />
             </Routes>
           </div>
         </div>
+        <DisputeResolution
+          buttonStyle="primary"
+        />
       </div>
     </div>
   );

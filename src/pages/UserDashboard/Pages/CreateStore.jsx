@@ -6,7 +6,7 @@ const CreateStorePage = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     storeName: '',
     storeDescription: '',
@@ -216,7 +216,7 @@ const CreateStorePage = () => {
     setTimeout(() => {
       setIsSubmitting(false);
       setShowSuccess(true);
-      
+
       // Redirect after success
       setTimeout(() => {
         navigate('/store-dashboard');
@@ -253,12 +253,43 @@ const CreateStorePage = () => {
               {/* Store Images Section */}
               <div className="stx-section">
                 <h2 className="stx-section-title">Store Images</h2>
-                
+                {/* Store Banner */}
+                <div className="stx-form-group">
+
+                  <label className="stx-form-label">Store Banner</label>
+                  <p className="stx-form-hint">Upload a banner for your store (recommended: 1920x400px, max 10MB)</p>
+
+                  {!bannerPreview ? (
+                    <label className="stx-banner-upload-area">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleBannerUpload}
+                        className="stx-banner-upload-input"
+                      />
+                      <div className="stx-banner-upload-content">
+                        <div className="stx-banner-upload-icon">
+                          <IconUpload size={32} />
+                        </div>
+                        <p className="stx-banner-upload-text">Click to upload banner</p>
+                        <p className="stx-banner-upload-subtext">PNG, JPG up to 10MB</p>
+                      </div>
+                    </label>
+                  ) : (
+                    <div className="stx-banner-preview-container">
+                      <img src={bannerPreview} alt="Banner preview" className="stx-banner-preview" />
+                      <button type="button" onClick={removeBanner} className="stx-banner-remove-btn">
+                        <IconX size={18} />
+                      </button>
+                    </div>
+                  )}
+                  {errors.banner && <span className="stx-form-error">{errors.banner}</span>}
+                </div>
                 {/* Store Logo */}
                 <div className="stx-form-group">
-                  <label className="stx-form-label">Store Logo <span className="stx-required">*</span></label>
+                  <label className="stx-form-label">Store Logo (Optional)</label>
                   <p className="stx-form-hint">Upload your store logo (recommended: 500x500px, max 5MB)</p>
-                  
+
                   {!logoPreview ? (
                     <label className="stx-logo-upload-area">
                       <input
@@ -286,43 +317,14 @@ const CreateStorePage = () => {
                   {errors.logo && <span className="stx-form-error">{errors.logo}</span>}
                 </div>
 
-                {/* Store Banner */}
-                <div className="stx-form-group">
-                  <label className="stx-form-label">Store Banner</label>
-                  <p className="stx-form-hint">Upload a banner for your store (recommended: 1920x400px, max 10MB)</p>
-                  
-                  {!bannerPreview ? (
-                    <label className="stx-banner-upload-area">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleBannerUpload}
-                        className="stx-banner-upload-input"
-                      />
-                      <div className="stx-banner-upload-content">
-                        <div className="stx-banner-upload-icon">
-                          <IconUpload size={32} />
-                        </div>
-                        <p className="stx-banner-upload-text">Click to upload banner</p>
-                        <p className="stx-banner-upload-subtext">PNG, JPG up to 10MB</p>
-                      </div>
-                    </label>
-                  ) : (
-                    <div className="stx-banner-preview-container">
-                      <img src={bannerPreview} alt="Banner preview" className="stx-banner-preview" />
-                      <button type="button" onClick={removeBanner} className="stx-banner-remove-btn">
-                        <IconX size={18} />
-                      </button>
-                    </div>
-                  )}
-                  {errors.banner && <span className="stx-form-error">{errors.banner}</span>}
-                </div>
+
+
               </div>
 
               {/* Store Details Section */}
               <div className="stx-section">
                 <h2 className="stx-section-title">Store Details</h2>
-                
+
                 {/* Store Name */}
                 <div className="stx-form-group">
                   <label className="stx-form-label" htmlFor="storeName">
@@ -385,7 +387,7 @@ const CreateStorePage = () => {
               <div className="stx-section">
                 <h2 className="stx-section-title">Store Categories</h2>
                 <p className="stx-section-subtitle">Select all categories that apply to your store</p>
-                
+
                 <div className="stx-form-group">
                   <div className="stx-categories-grid">
                     {availableCategories.map((category) => (
@@ -415,7 +417,7 @@ const CreateStorePage = () => {
               {/* Services Section */}
               <div className="stx-section">
                 <h2 className="stx-section-title">Service Offerings</h2>
-                
+
                 <div className="stx-form-group">
                   <label className="stx-service-checkbox">
                     <input
@@ -514,7 +516,7 @@ const CreateStorePage = () => {
         </>
       )}
 
-   
+
     </div>
   );
 };
