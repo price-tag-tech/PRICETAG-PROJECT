@@ -3164,6 +3164,12 @@ position: relative;
 .review-input-group textarea {
   resize: vertical;
 }
+.review-input-group select:focus,
+.review-input-group input:focus,
+.review-input-group textarea:focus {
+    border-color: #10b981;
+    border-width: 2px;
+}
 
 .review-input-group p{
     font-size: 13px;
@@ -3409,9 +3415,9 @@ position: relative;
 .Prodduc-BansSPlY-Footer span{
     position: relative;
     width:100%;
-    max-width: 100px;
+    width: 100px;
     height: auto;
-    max-height: 100px;
+    height: 80px;
     border-radius: 5px;
     user-select: none;
     cursor: pointer;
@@ -3740,6 +3746,11 @@ position: relative;
     gap: 10px;
     margin-top: 10px;
 }
+.Oks-BTNS-Content{
+    position: relative;
+    width: 100%;
+    height: auto;
+}
 .Oks-BTNS button{
     position: relative;
     width: 100%;
@@ -3762,6 +3773,107 @@ position: relative;
 .Oks-BTNS button svg{
     width: 15px;
 }
+
+.Oks-BTNS-Gen-Drop{
+    position: absolute;
+    width: 100%;
+    height: auto;
+     border: 1px solid #ededed;
+    box-shadow: 0 8px 8px 0 rgba(25, 25, 25, .04);
+    -webkit-box-shadow: 0 8px 8px 0 rgba(25, 25, 25, .04);
+    -moz-box-shadow: 0 8px 8px 0 rgba(25, 25, 25, .04);
+    background-color: #fff;
+    border-radius: 8px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    top: 100%;
+    left: 0;
+    margin-top: 5px;
+}
+
+.AGhs-Ul{
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.AGhs-Ul li{
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ededed;
+    font-size: 13px;
+}
+
+.AGhs-Ul li span{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.AGhs-Ul li span svg{
+    width: 15px;
+}
+.AGhs-Ul li span b{
+    font-weight: 600;
+}
+
+.Serve-Sab-Batn{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding:5px 10px;
+    border: 1px solid #10b981;
+    color: #10b981;
+    font-weight: 500;
+    border-radius: 5px;
+    font-size: 12px;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+}
+
+.Serve-Sab-Batn:hover{
+    background-color: #f1fdf9;
+}
+
+.AGhs-Dae{
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    padding: 10px 20px;
+    padding-top: 0px;
+}
+.AGhs-Dae p{
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    font-size: 13px;
+    padding: 8px 0px;
+    color: #707070;
+}
+
+
+
+
 
 
 /* ProductDetails-MaiNn-2DlTS-4 */
@@ -3837,6 +3949,22 @@ position: relative;
 
 .VisiteStor-Btn:hover{
     background-color: #fffbf4 !important;
+}
+
+.share-Btn{
+    border-color: #3b82f6 !important;
+    color: #3b82f6 !important;
+}
+.share-Btn:hover{
+    background-color: #f4f7fc !important;
+}
+.report-Btn{
+    border-color: #b91c1c !important;
+    color: #b91c1c !important;
+}
+
+.report-Btn:hover{
+    background-color: #fdf5f5 !important;
 }
 
 /* ProductDetails-MaiNn-2DlTS-5 */
@@ -3939,4 +4067,105 @@ position: relative;
 }
 .tot-Rev span{
     font-size: 15px;
+}
+
+
+/* zoom-modal */
+
+.zoom-modal{
+    position: fixed;
+    z-index: 4000;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.zoom-modal .modal-backdrop{
+    z-index: -100;
+}
+
+.zoomed-image{
+    position: relative;
+    max-width: 90%;
+    max-height: 90vh;
+}
+
+@media screen and (max-width:500px){
+    .zoomed-image{
+    max-width: 100% !important;
+    max-height: 100vh !important;
+    width: 100% !important;
+}
+.zoom-close-btn svg{
+    width: 20px !important;
+}
+}
+.zoom-close-btn{
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: transparent;
+    color: #fff;
+    user-select: none;
+    cursor: pointer;
+}
+
+.zoom-close-btn svg{
+    width: 30px;
+}
+
+.Zoom-nav-btn {
+    position: absolute;
+    z-index: 100;
+    transform: translateY(-50%);
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+.Zoom-nav-btn:hover{
+    background-color:rgba(255,255,255,0.2);
+}
+.Zoom-nav-btn svg{
+    width: 20px
+}
+.Zoom-nav-btn.next{
+    right: 20px;
+}
+.Zoom-nav-btn.prev{
+    left: 20px;
+}
+
+@media screen and (max-width:1000px){
+    .Zoom-nav-btn {
+        background-color: rgba(0, 0, 0, 0.6) !important;
+        width: 40px !important;
+        height: 40px !important;
+    }
+    .Zoom-nav-btn.next{
+    right: 0px !important;
+}
+.Zoom-nav-btn.prev{
+    left: 0px !important;
+}
+.Zoom-nav-btn svg{
+    width: 15px !important;
+}
 }
