@@ -156,8 +156,11 @@ const Store = () => {
   const [showMapModal, setShowMapModal] = useState(false);
   const [userLat, setUserLat] = useState(null);
   const [userLng, setUserLng] = useState(null);
+  const [copied, setCopied] = useState(false);
 
   const categoriesRef = useRef(null);
+  const shareModalRef = useRef(null);
+  const mapModalRef = useRef(null);
 
   const shareLink = `${window.location.origin}/store/${store.id}`;
 
@@ -198,12 +201,28 @@ const Store = () => {
     }
   }, []);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(shareLink).then(() => {
-      setShowShareModal(false);
-    }).catch(err => {
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (showShareModal && shareModalRef.current && !shareModalRef.current.contains(e.target)) {
+        setShowShareModal(false);
+      }
+      if (showMapModal && mapModalRef.current && !mapModalRef.current.contains(e.target)) {
+        setShowMapModal(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [showShareModal, showMapModal]);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(shareLink);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
       console.error('Failed to copy: ', err);
-    });
+    }
   };
 
   const handleCloseShareModal = () => {
@@ -649,6 +668,7 @@ const Store = () => {
           />
           <div 
             className="cities-modal" 
+            ref={shareModalRef}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-header">
@@ -680,7 +700,7 @@ const Store = () => {
                 className="custom-btn-background custom-btn-radius ssuba-btn"
                 onClick={handleCopy}
               >
-                Copy Link
+                {copied ? 'Copied!' : 'Copy Link'}
               </button>
             </div>
           </div>
@@ -696,6 +716,7 @@ const Store = () => {
           />
           <div 
             className="cities-modal" 
+            ref={mapModalRef}
             onClick={(e) => e.stopPropagation()}
             style={{ maxWidth: '700px' }}
           >

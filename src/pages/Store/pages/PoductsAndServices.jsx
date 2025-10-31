@@ -1,4 +1,4 @@
-import { IconPlus, IconSearch, IconFilter, IconEdit, IconTrash, IconEye, IconDots, IconX } from '@tabler/icons-react';
+import { IconPlus, IconSearch, IconFilter, IconEdit, IconTrash, IconEye, IconX, IconStar, IconStarFilled } from '@tabler/icons-react';
 import React, { useState } from 'react';
 
 const ProductsServicesPage = () => {
@@ -10,8 +10,9 @@ const ProductsServicesPage = () => {
   const [editModal, setEditModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [addModal, setAddModal] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-  // Initial data
+  // Initial data with multiple images, condition, rating, and views
   const initialProducts = [
     {
       id: 1,
@@ -21,8 +22,15 @@ const ProductsServicesPage = () => {
       price: '₦ 8,000',
       stock: 45,
       status: 'In Stock',
-      image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop',
-      description: 'Premium wireless headset with noise cancellation'
+      condition: 'New',
+      rating: 4.5,
+      views: 1247,
+      images: [
+        'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop',
+        'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop',
+        'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&h=400&fit=crop'
+      ],
+      description: 'Premium wireless headset with noise cancellation and 30-hour battery life. Perfect for gaming and professional use.'
     },
     {
       id: 2,
@@ -32,8 +40,14 @@ const ProductsServicesPage = () => {
       price: '₦ 7,500',
       stock: 12,
       status: 'Low Stock',
-      image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&h=400&fit=crop',
-      description: 'High precision gaming mouse with RGB lighting'
+      condition: 'Refurbished',
+      rating: 4.2,
+      views: 892,
+      images: [
+        'https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&h=400&fit=crop',
+        'https://images.unsplash.com/photo-1605773527852-c546a8584ea3?w=400&h=400&fit=crop'
+      ],
+      description: 'High precision gaming mouse with RGB lighting and customizable buttons. Ergonomic design for long gaming sessions.'
     },
     {
       id: 3,
@@ -43,8 +57,14 @@ const ProductsServicesPage = () => {
       price: '₦ 4,000',
       stock: 0,
       status: 'Out of Stock',
-      image: 'https://images.unsplash.com/photo-1591290619762-9b2c0683cd79?w=400&h=400&fit=crop',
-      description: 'Quick charge compatible USB-C charger'
+      condition: 'New',
+      rating: 4.0,
+      views: 567,
+      images: [
+        'https://images.unsplash.com/photo-1591290619762-9b2c0683cd79?w=400&h=400&fit=crop',
+        'https://images.unsplash.com/photo-1609592810796-3809fb0bdca7?w=400&h=400&fit=crop'
+      ],
+      description: 'Quick charge compatible USB-C charger with multiple ports. Fast charging for all your devices.'
     },
     {
       id: 4,
@@ -54,8 +74,14 @@ const ProductsServicesPage = () => {
       price: '₦ 25,000',
       stock: 28,
       status: 'In Stock',
-      image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=400&fit=crop',
-      description: 'Adjustable aluminum laptop stand for better ergonomics'
+      condition: 'New',
+      rating: 4.8,
+      views: 1563,
+      images: [
+        'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=400&fit=crop',
+        'https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=400&h=400&fit=crop'
+      ],
+      description: 'Adjustable aluminum laptop stand for better ergonomics. Sturdy construction with ventilation for better cooling.'
     },
     {
       id: 5,
@@ -65,8 +91,15 @@ const ProductsServicesPage = () => {
       price: '₦ 35,000',
       stock: 8,
       status: 'Low Stock',
-      image: 'https://images.unsplash.com/photo-1595225476474-87563907a212?w=400&h=400&fit=crop',
-      description: 'RGB mechanical keyboard with blue switches'
+      condition: 'Used - Like New',
+      rating: 4.6,
+      views: 2341,
+      images: [
+        'https://images.unsplash.com/photo-1595225476474-87563907a212?w=400&h=400&fit=crop',
+        'https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=400&h=400&fit=crop',
+        'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=400&h=400&fit=crop'
+      ],
+      description: 'RGB mechanical keyboard with blue switches. Customizable lighting and programmable macros.'
     },
     {
       id: 6,
@@ -76,8 +109,14 @@ const ProductsServicesPage = () => {
       price: '₦ 22,500',
       stock: 33,
       status: 'In Stock',
-      image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=400&fit=crop',
-      description: 'Ultra HD webcam for streaming and video calls'
+      condition: 'New',
+      rating: 4.3,
+      views: 1789,
+      images: [
+        'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=400&fit=crop',
+        'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=400&h=400&fit=crop'
+      ],
+      description: 'Ultra HD webcam for streaming and video calls. Built-in microphone and auto-focus features.'
     }
   ];
 
@@ -91,8 +130,10 @@ const ProductsServicesPage = () => {
       duration: '2-4 weeks',
       status: 'Active',
       bookings: 12,
+      rating: 4.7,
+      views: 845,
       image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?w=400&h=400&fit=crop',
-      description: 'Custom website development with modern technologies'
+      description: 'Custom website development with modern technologies and responsive design.'
     },
     {
       id: 2,
@@ -103,8 +144,10 @@ const ProductsServicesPage = () => {
       duration: '1 week',
       status: 'Active',
       bookings: 25,
+      rating: 4.4,
+      views: 923,
       image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=400&fit=crop',
-      description: 'Professional graphic design for branding and marketing'
+      description: 'Professional graphic design for branding and marketing materials.'
     },
     {
       id: 3,
@@ -115,8 +158,10 @@ const ProductsServicesPage = () => {
       duration: '1 month',
       status: 'Active',
       bookings: 8,
+      rating: 4.1,
+      views: 456,
       image: 'https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=400&h=400&fit=crop',
-      description: 'Improve your website ranking on search engines'
+      description: 'Improve your website ranking on search engines with proven SEO strategies.'
     },
     {
       id: 4,
@@ -127,8 +172,10 @@ const ProductsServicesPage = () => {
       duration: '4-6 weeks',
       status: 'Inactive',
       bookings: 5,
+      rating: 4.9,
+      views: 1234,
       image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop',
-      description: 'Native and cross-platform mobile app development'
+      description: 'Native and cross-platform mobile app development for iOS and Android.'
     }
   ];
 
@@ -142,8 +189,11 @@ const ProductsServicesPage = () => {
     category: 'Electronics',
     price: '',
     stock: '',
+    condition: 'New',
+    rating: '',
+    views: '',
     description: '',
-    image: ''
+    images: ['']
   });
 
   const [newService, setNewService] = useState({
@@ -152,6 +202,8 @@ const ProductsServicesPage = () => {
     category: 'IT Services',
     price: '',
     duration: '',
+    rating: '',
+    views: '',
     description: '',
     image: ''
   });
@@ -183,6 +235,7 @@ const ProductsServicesPage = () => {
   // Handle actions
   const handleView = (item) => {
     setSelectedItem(item);
+    setSelectedImageIndex(0);
     setViewModal(true);
   };
 
@@ -204,8 +257,11 @@ const ProductsServicesPage = () => {
         category: 'Electronics',
         price: '',
         stock: '',
+        condition: 'New',
+        rating: '',
+        views: '',
         description: '',
-        image: ''
+        images: ['']
       });
     } else {
       setNewService({
@@ -214,6 +270,8 @@ const ProductsServicesPage = () => {
         category: 'IT Services',
         price: '',
         duration: '',
+        rating: '',
+        views: '',
         description: '',
         image: ''
       });
@@ -258,8 +316,11 @@ const ProductsServicesPage = () => {
         price: `₦ ${parseInt(newProduct.price).toLocaleString()}`,
         stock: parseInt(newProduct.stock),
         status: parseInt(newProduct.stock) === 0 ? 'Out of Stock' : parseInt(newProduct.stock) <= 10 ? 'Low Stock' : 'In Stock',
+        condition: newProduct.condition,
+        rating: parseFloat(newProduct.rating) || 0,
+        views: parseInt(newProduct.views) || 0,
         description: newProduct.description,
-        image: newProduct.image || 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=400&fit=crop'
+        images: newProduct.images.filter(img => img.trim() !== '')
       };
       setProducts([...products, newItem]);
     } else {
@@ -272,6 +333,8 @@ const ProductsServicesPage = () => {
         duration: newService.duration,
         status: 'Active',
         bookings: 0,
+        rating: parseFloat(newService.rating) || 0,
+        views: parseInt(newService.views) || 0,
         description: newService.description,
         image: newService.image || 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop'
       };
@@ -291,6 +354,61 @@ const ProductsServicesPage = () => {
 
   const handleNewServiceChange = (field, value) => {
     setNewService(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleAddImageField = () => {
+    setNewProduct(prev => ({
+      ...prev,
+      images: [...prev.images, '']
+    }));
+  };
+
+  const handleImageUrlChange = (index, value) => {
+    setNewProduct(prev => ({
+      ...prev,
+      images: prev.images.map((img, i) => i === index ? value : img)
+    }));
+  };
+
+  const handleRemoveImageField = (index) => {
+    setNewProduct(prev => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index)
+    }));
+  };
+
+  // Render star rating
+  const renderStars = (rating) => {
+    const stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<IconStarFilled key={i} size={16} className="star-filled" />);
+    }
+
+    if (hasHalfStar) {
+      stars.push(<IconStarFilled key="half" size={16} className="star-filled" />);
+    }
+
+    const emptyStars = 5 - stars.length;
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(<IconStar key={`empty-${i}`} size={16} className="star-empty" />);
+    }
+
+    return stars;
+  };
+
+  // Get condition color
+  const getConditionColor = (condition) => {
+    switch (condition) {
+      case 'New': return '#10b981';
+      case 'Refurbished': return '#f59e0b';
+      case 'Used - Like New': return '#3b82f6';
+      case 'Used - Good': return '#8b5cf6';
+      case 'Used - Fair': return '#ef4444';
+      default: return '#6b7280';
+    }
   };
 
   return (
@@ -353,12 +471,30 @@ const ProductsServicesPage = () => {
           {filteredProducts.map(product => (
             <div key={product.id} className="product-card">
               <div className="product-image">
-                <img src={product.image} alt={product.name} />
+                <img src={product.images[0]} alt={product.name} />
+                <div className="product-image-badges">
+                  <span 
+                    className="condition-badge"
+                    style={{ backgroundColor: getConditionColor(product.condition) }}
+                  >
+                    {product.condition}
+                  </span>
+                  <span className="views-badge">
+                    <IconEye size={12} />
+                    {product.views}
+                  </span>
+                </div>
               </div>
               <div className="product-info">
                 <h3 className="product-name">{product.name}</h3>
                 <p className="product-code">Code: {product.code}</p>
-                <div className="product-category">{product.category}</div>
+                <div className="product-meta">
+                  <div className="product-category">{product.category}</div>
+                  <div className="product-rating">
+                    {renderStars(product.rating)}
+                    <span className="rating-text">({product.rating})</span>
+                  </div>
+                </div>
                 <div className="product-details">
                   <div className="product-price">{product.price}</div>
                   <div className="product-stock">
@@ -390,11 +526,23 @@ const ProductsServicesPage = () => {
               <div className="service-main">
                 <div className="service-image">
                   <img src={service.image} alt={service.name} />
+                  <div className="service-image-badges">
+                    <span className="views-badge">
+                      <IconEye size={12} />
+                      {service.views}
+                    </span>
+                  </div>
                 </div>
                 <div className="service-info">
                   <h3 className="service-name">{service.name}</h3>
                   <p className="service-code">Code: {service.code}</p>
-                  <div className="service-category">{service.category}</div>
+                  <div className="service-meta">
+                    <div className="service-category">{service.category}</div>
+                    <div className="service-rating">
+                      {renderStars(service.rating)}
+                      <span className="rating-text">({service.rating})</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="service-details">
@@ -444,21 +592,52 @@ const ProductsServicesPage = () => {
               </button>
             </div>
             <div className="modal-body">
-              <div className="modal-image">
-                <img src={selectedItem.image} alt={selectedItem.name} />
-              </div>
-              <div className="modal-info">
-                <h3>{selectedItem.name}</h3>
-                <p className="modal-code">Code: {selectedItem.code}</p>
-                <div className="modal-badge">{selectedItem.category}</div>
-                <p className="modal-description">{selectedItem.description}</p>
-                <div className="modal-details">
-                  <div className="modal-detail-row">
-                    <span>Price:</span>
-                    <span className="modal-price">{selectedItem.price}</span>
+              {activeTab === 'products' ? (
+                <>
+                  {/* Product Image Gallery */}
+                  <div className="modal-image-gallery">
+                    <div className="main-image">
+                      <img src={selectedItem.images[selectedImageIndex]} alt={selectedItem.name} />
+                    </div>
+                    {selectedItem.images.length > 1 && (
+                      <div className="image-thumbnails">
+                        {selectedItem.images.map((image, index) => (
+                          <button
+                            key={index}
+                            className={`thumbnail ${selectedImageIndex === index ? 'active' : ''}`}
+                            onClick={() => setSelectedImageIndex(index)}
+                          >
+                            <img src={image} alt={`${selectedItem.name} ${index + 1}`} />
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  {activeTab === 'products' ? (
-                    <>
+                  
+                  <div className="modal-info">
+                    <div className="modal-header-info">
+                      <h3>{selectedItem.name}</h3>
+                      <div className="modal-rating">
+                        {renderStars(selectedItem.rating)}
+                        <span className="rating-value">({selectedItem.rating})</span>
+                      </div>
+                    </div>
+                    <p className="modal-code">Code: {selectedItem.code}</p>
+                    <div className="modal-badges">
+                      <div className="modal-badge">{selectedItem.category}</div>
+                      <div 
+                        className="modal-badge p"
+                        style={{ backgroundColor: getConditionColor(selectedItem.condition) }}
+                      >
+                        {selectedItem.condition}
+                      </div>
+                    </div>
+                    <p className="modal-description">{selectedItem.description}</p>
+                    <div className="modal-details">
+                      <div className="modal-detail-row">
+                        <span>Price:</span>
+                        <span className="modal-price">{selectedItem.price}</span>
+                      </div>
                       <div className="modal-detail-row">
                         <span>Stock:</span>
                         <span>{selectedItem.stock} units</span>
@@ -469,9 +648,38 @@ const ProductsServicesPage = () => {
                           {selectedItem.status}
                         </span>
                       </div>
-                    </>
-                  ) : (
-                    <>
+                      <div className="modal-detail-row">
+                        <span>Views:</span>
+                        <span>{selectedItem.views.toLocaleString()}</span>
+                      </div>
+                      <div className="modal-detail-row">
+                        <span>Rating:</span>
+                        <span>{selectedItem.rating}/5 ({Math.floor(selectedItem.rating * 20)}%)</span>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="modal-image">
+                    <img src={selectedItem.image} alt={selectedItem.name} />
+                  </div>
+                  <div className="modal-info">
+                    <div className="modal-header-info">
+                      <h3>{selectedItem.name}</h3>
+                      <div className="modal-rating">
+                        {renderStars(selectedItem.rating)}
+                        <span className="rating-value">({selectedItem.rating})</span>
+                      </div>
+                    </div>
+                    <p className="modal-code">Code: {selectedItem.code}</p>
+                    <div className="modal-badge">{selectedItem.category}</div>
+                    <p className="modal-description">{selectedItem.description}</p>
+                    <div className="modal-details">
+                      <div className="modal-detail-row">
+                        <span>Price:</span>
+                        <span className="modal-price">{selectedItem.price}</span>
+                      </div>
                       <div className="modal-detail-row">
                         <span>Duration:</span>
                         <span>{selectedItem.duration}</span>
@@ -481,21 +689,29 @@ const ProductsServicesPage = () => {
                         <span>{selectedItem.bookings}</span>
                       </div>
                       <div className="modal-detail-row">
+                        <span>Views:</span>
+                        <span>{selectedItem.views.toLocaleString()}</span>
+                      </div>
+                      <div className="modal-detail-row">
+                        <span>Rating:</span>
+                        <span>{selectedItem.rating}/5 ({Math.floor(selectedItem.rating * 20)}%)</span>
+                      </div>
+                      <div className="modal-detail-row">
                         <span>Status:</span>
                         <span className={`service-status service-status-${selectedItem.status.toLowerCase()}`}>
                           {selectedItem.status}
                         </span>
                       </div>
-                    </>
-                  )}
-                </div>
-              </div>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
       )}
 
-      {/* Edit Modal */}
+      {/* Edit Modal - ADDED THIS MISSING MODAL */}
       {editModal && selectedItem && (
         <div className="modal-overlay" onClick={() => setEditModal(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -548,35 +764,117 @@ const ProductsServicesPage = () => {
                   />
                 </div>
                 {activeTab === 'products' ? (
-                  <div className="form-group">
-                    <label>Stock</label>
-                    <input 
-                      type="number" 
-                      value={selectedItem.stock} 
-                      onChange={(e) => handleEditChange('stock', parseInt(e.target.value))}
-                      required 
-                    />
-                  </div>
+                  <>
+                    <div className="form-group">
+                      <label>Stock</label>
+                      <input 
+                        type="number" 
+                        value={selectedItem.stock} 
+                        onChange={(e) => handleEditChange('stock', parseInt(e.target.value))}
+                        required 
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Condition</label>
+                      <select 
+                        value={selectedItem.condition} 
+                        onChange={(e) => handleEditChange('condition', e.target.value)}
+                      >
+                        <option>New</option>
+                        <option>Refurbished</option>
+                        <option>Used - Like New</option>
+                        <option>Used - Good</option>
+                        <option>Used - Fair</option>
+                      </select>
+                    </div>
+                    <div className="form-group">
+                      <label>Rating</label>
+                      <input 
+                        type="number" 
+                        step="0.1"
+                        min="0"
+                        max="5"
+                        value={selectedItem.rating} 
+                        onChange={(e) => handleEditChange('rating', parseFloat(e.target.value))}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Views</label>
+                      <input 
+                        type="number" 
+                        value={selectedItem.views} 
+                        onChange={(e) => handleEditChange('views', parseInt(e.target.value))}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Description</label>
+                      <textarea 
+                        rows="3" 
+                        value={selectedItem.description} 
+                        onChange={(e) => handleEditChange('description', e.target.value)}
+                        required 
+                      />
+                    </div>
+                  </>
                 ) : (
-                  <div className="form-group">
-                    <label>Duration</label>
-                    <input 
-                      type="text" 
-                      value={selectedItem.duration} 
-                      onChange={(e) => handleEditChange('duration', e.target.value)}
-                      required 
-                    />
-                  </div>
+                  <>
+                    <div className="form-group">
+                      <label>Duration</label>
+                      <input 
+                        type="text" 
+                        value={selectedItem.duration} 
+                        onChange={(e) => handleEditChange('duration', e.target.value)}
+                        required 
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Rating</label>
+                      <input 
+                        type="number" 
+                        step="0.1"
+                        min="0"
+                        max="5"
+                        value={selectedItem.rating} 
+                        onChange={(e) => handleEditChange('rating', parseFloat(e.target.value))}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Views</label>
+                      <input 
+                        type="number" 
+                        value={selectedItem.views} 
+                        onChange={(e) => handleEditChange('views', parseInt(e.target.value))}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Bookings</label>
+                      <input 
+                        type="number" 
+                        value={selectedItem.bookings} 
+                        onChange={(e) => handleEditChange('bookings', parseInt(e.target.value))}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Status</label>
+                      <select 
+                        value={selectedItem.status} 
+                        onChange={(e) => handleEditChange('status', e.target.value)}
+                      >
+                        <option>Active</option>
+                        <option>Inactive</option>
+                      </select>
+                    </div>
+                    <div className="form-group">
+                      <label>Description</label>
+                      <textarea 
+                        rows="3" 
+                        value={selectedItem.description} 
+                        onChange={(e) => handleEditChange('description', e.target.value)}
+                        required 
+                      />
+                    </div>
+                  </>
                 )}
-                <div className="form-group">
-                  <label>Description</label>
-                  <textarea 
-                    rows="3" 
-                    value={selectedItem.description} 
-                    onChange={(e) => handleEditChange('description', e.target.value)}
-                    required 
-                  />
-                </div>
                 <div className="form-actions">
                   <button type="button" className="btn-cancel" onClick={() => setEditModal(false)}>Cancel</button>
                   <button type="submit" className="btn-save">Save Changes</button>
@@ -653,26 +951,124 @@ const ProductsServicesPage = () => {
                   />
                 </div>
                 {activeTab === 'products' ? (
-                  <div className="form-group">
-                    <label>Stock</label>
-                    <input 
-                      type="number" 
-                      value={newProduct.stock}
-                      onChange={(e) => handleNewProductChange('stock', e.target.value)}
-                      required 
-                    />
-                  </div>
+                  <>
+                    <div className="form-group">
+                      <label>Stock</label>
+                      <input 
+                        type="number" 
+                        value={newProduct.stock}
+                        onChange={(e) => handleNewProductChange('stock', e.target.value)}
+                        required 
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Condition</label>
+                      <select 
+                        value={newProduct.condition}
+                        onChange={(e) => handleNewProductChange('condition', e.target.value)}
+                      >
+                        <option>New</option>
+                        <option>Refurbished</option>
+                        <option>Used - Like New</option>
+                        <option>Used - Good</option>
+                        <option>Used - Fair</option>
+                      </select>
+                    </div>
+                    <div className="form-group">
+                      <label>Rating (0-5)</label>
+                      <input 
+                        type="number" 
+                        step="0.1"
+                        min="0"
+                        max="5"
+                        value={newProduct.rating}
+                        onChange={(e) => handleNewProductChange('rating', e.target.value)}
+                        placeholder="4.5"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Views</label>
+                      <input 
+                        type="number" 
+                        value={newProduct.views}
+                        onChange={(e) => handleNewProductChange('views', e.target.value)}
+                        placeholder="1000"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Product Images</label>
+                      {newProduct.images.map((image, index) => (
+                        <div key={index} className="image-input-group">
+                          <input 
+                            type="url" 
+                            value={image}
+                            onChange={(e) => handleImageUrlChange(index, e.target.value)}
+                            placeholder="https://example.com/image.jpg"
+                          />
+                          {newProduct.images.length > 1 && (
+                            <button 
+                              type="button" 
+                              className="remove-image-btn"
+                              onClick={() => handleRemoveImageField(index)}
+                            >
+                              <IconX size={16} />
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                      <button 
+                        type="button" 
+                        className="add-image-btn"
+                        onClick={handleAddImageField}
+                      >
+                        <IconPlus size={16} />
+                        Add Another Image
+                      </button>
+                    </div>
+                  </>
                 ) : (
-                  <div className="form-group">
-                    <label>Duration</label>
-                    <input 
-                      type="text" 
-                      value={newService.duration}
-                      onChange={(e) => handleNewServiceChange('duration', e.target.value)}
-                      placeholder="e.g., 2-4 weeks"
-                      required 
-                    />
-                  </div>
+                  <>
+                    <div className="form-group">
+                      <label>Duration</label>
+                      <input 
+                        type="text" 
+                        value={newService.duration}
+                        onChange={(e) => handleNewServiceChange('duration', e.target.value)}
+                        placeholder="e.g., 2-4 weeks"
+                        required 
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Rating (0-5)</label>
+                      <input 
+                        type="number" 
+                        step="0.1"
+                        min="0"
+                        max="5"
+                        value={newService.rating}
+                        onChange={(e) => handleNewServiceChange('rating', e.target.value)}
+                        placeholder="4.5"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Views</label>
+                      <input 
+                        type="number" 
+                        value={newService.views}
+                        onChange={(e) => handleNewServiceChange('views', e.target.value)}
+                        placeholder="1000"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Service Image URL</label>
+                      <input 
+                        type="url" 
+                        value={newService.image}
+                        onChange={(e) => handleNewServiceChange('image', e.target.value)}
+                        placeholder="https://example.com/image.jpg"
+                      />
+                    </div>
+                  </>
                 )}
                 <div className="form-group">
                   <label>Description</label>
@@ -684,18 +1080,6 @@ const ProductsServicesPage = () => {
                       : handleNewServiceChange('description', e.target.value)
                     }
                     required 
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Image URL (Optional)</label>
-                  <input 
-                    type="url" 
-                    value={activeTab === 'products' ? newProduct.image : newService.image}
-                    onChange={(e) => activeTab === 'products' 
-                      ? handleNewProductChange('image', e.target.value)
-                      : handleNewServiceChange('image', e.target.value)
-                    }
-                    placeholder="https://example.com/image.jpg"
                   />
                 </div>
                 <div className="form-actions">
@@ -729,7 +1113,6 @@ const ProductsServicesPage = () => {
         </div>
       )}
 
-   
     </div>
   );
 };

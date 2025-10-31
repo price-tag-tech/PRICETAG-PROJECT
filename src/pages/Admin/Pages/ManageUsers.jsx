@@ -22,7 +22,7 @@ const ManageUsers = () => {
       name: 'Tech Store NG',
       email: 'contact@techstore.ng',
       phone: '+234 802 345 6789',
-      accountType: 'Seller',
+      accountType: 'Buisness',
       status: 'Active',
       joined: 'Feb 20, 2024',
       orders: 328,
@@ -44,7 +44,7 @@ const ManageUsers = () => {
       name: 'Mike Electronics',
       email: 'info@mikeelec.com',
       phone: '+234 804 567 8901',
-      accountType: 'Seller',
+      accountType: 'Buisness',
       status: 'Pending',
       joined: 'Oct 25, 2025',
       orders: 0,
@@ -191,7 +191,7 @@ const ManageUsers = () => {
                 <th>S/N</th>
                 <th>NAME</th>
                 <th>EMAIL</th>
-                <th>PHONE</th>
+                
                 <th>TYPE</th>
                 <th>JOINED</th>
                 <th>ORDERS</th>
@@ -206,12 +206,12 @@ const ManageUsers = () => {
                   <td data-label="S/N">{index + 1}</td>
                   <td data-label="Name">{user.name}</td>
                   <td data-label="Email">{user.email}</td>
-                  <td data-label="Phone">{user.phone}</td>
+                  
                   <td data-label="Type">
                     <span style={{
                       padding: '4px 8px',
-                      background: user.accountType === 'Seller' ? '#dbeafe' : '#f3f4f6',
-                      color: user.accountType === 'Seller' ? '#2563eb' : '#6b7280',
+                      background: user.accountType === 'Buisness' ? '#dbeafe' : '#f3f4f6',
+                      color: user.accountType === 'Buisness' ? '#2563eb' : '#6b7280',
                       borderRadius: '4px',
                       fontSize: '12px',
                       fontWeight: '500'
@@ -229,12 +229,7 @@ const ManageUsers = () => {
                   </td>
                   <td data-label="Actions">
                     <div style={{display: 'flex', gap: '8px', justifyContent: 'flex-end'}}>
-                      <button 
-                        className="store-customize-btn"
-                        style={{padding: '6px 12px', fontSize: '12px'}}
-                      >
-                        View
-                      </button>
+                      
                       {user.status === 'Active' && (
                         <button 
                           className="store-customize-btn"

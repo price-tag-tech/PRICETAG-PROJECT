@@ -19,7 +19,7 @@ const ManageAdmins = () => {
       id: 2,
       name: 'Bob Smith',
       email: 'bob.s@admin.com',
-      role: 'User Registration',
+      role: 'User Reg',
       permissions: 'KYC, Verification',
       status: 'Active',
       lastLogin: '5 hours ago',
@@ -88,21 +88,7 @@ const ManageAdmins = () => {
         ))}
       </div>
 
-      {/* Quick Actions */}
-      <div className="admin-quick-actions">
-        <button className="store-add-service-btn">
-          <IconShield size={20} />
-          <span>Role Permissions</span>
-        </button>
-        <button className="store-add-service-btn">
-          <IconUser size={20} />
-          <span>Access Logs</span>
-        </button>
-        <button className="store-add-service-btn">
-          <IconSettings size={20} />
-          <span>Security Settings</span>
-        </button>
-      </div>
+    
 
       {/* Admins Table */}
       <div className="store-orders-card">
@@ -127,7 +113,7 @@ const ManageAdmins = () => {
                 <th>NAME</th>
                 <th>EMAIL</th>
                 <th>ROLE</th>
-                <th>PERMISSIONS</th>
+                
                 <th>STATUS</th>
                 <th>LAST LOGIN</th>
                 <th>CREATED</th>
@@ -152,7 +138,7 @@ const ManageAdmins = () => {
                       {admin.role}
                     </span>
                   </td>
-                  <td data-label="Permissions">{admin.permissions}</td>
+                
                   <td data-label="Status">
                     <span className={`store-status-${admin.status.toLowerCase()}`}>
                       {admin.status}

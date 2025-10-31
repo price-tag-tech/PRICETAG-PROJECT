@@ -98,7 +98,7 @@ export default function AdminTopNavbar({ onToggleSidebar, isSidebarOpen }) {
       {/* Right Section */}
       <div className="emk-topnav-right">
         {/* Theme Toggle */}
-        <button
+        {/* <button
           className="emk-icon-button"
           onClick={() => setIsDarkMode(!isDarkMode)}
           aria-label="Toggle theme"
@@ -108,7 +108,7 @@ export default function AdminTopNavbar({ onToggleSidebar, isSidebarOpen }) {
           ) : (
             <MoonIcon className="emk-icon-button-icon" />
           )}
-        </button>
+        </button> */}
 
         {/* Notifications */}
         <div className="emk-notification-wrapper" ref={notificationRef}>

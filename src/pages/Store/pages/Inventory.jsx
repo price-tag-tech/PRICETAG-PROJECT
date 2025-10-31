@@ -1,4 +1,4 @@
-import { IconSearch, IconFilter, IconPlus, IconAlertCircle, IconTrendingUp, IconTrendingDown, IconEdit, IconPackage, IconX, IconCoin, IconExclamationCircle } from '@tabler/icons-react';
+import { IconSearch, IconFilter, IconPlus, IconAlertCircle, IconTrendingUp, IconTrendingDown, IconEdit, IconPackage, IconX, IconCoin, IconExclamationCircle, IconUpload, IconPhoto } from '@tabler/icons-react';
 import React, { useState, useEffect } from 'react';
 
 const InventoryPage = () => {
@@ -12,17 +12,20 @@ const InventoryPage = () => {
   const [showEditProductModal, setShowEditProductModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
 
+  // Default product image
+  const defaultProductImage = 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+
   // Product images from Unsplash (real product images)
   const productImages = {
     1: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80', // Headphones
-    2: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80', // Gaming Mouse
-    3: 'https://images.unsplash.com/photo-1609592810793-abeb6c64b5c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80', // Charger
-    4: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80', // Laptop Stand
-    5: 'https://images.unsplash.com/photo-1541140532154-b024d705b90a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80', // Keyboard
-    6: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'  // Webcam
+    2: 'https://images.unsplash.com/photo-1527814050087-3793815479db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80', // Gaming Mouse
+    3: 'https://images.unsplash.com/photo-1609592810796-3809fb0bdca7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80', // Charger
+    4: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80', // Laptop Stand
+    5: 'https://images.unsplash.com/photo-1595225476474-87563907a212?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80', // Keyboard
+    6: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'  // Webcam
   };
 
-  // Initial inventory data
+  // Initial inventory data with image support
   const initialInventory = [
     {
       id: 1,
@@ -35,7 +38,8 @@ const InventoryPage = () => {
       totalValue: 360000,
       supplier: 'Tech Suppliers Ltd',
       lastRestocked: '2024-10-20',
-      status: 'In Stock'
+      status: 'In Stock',
+      image: productImages[1]
     },
     {
       id: 2,
@@ -48,7 +52,8 @@ const InventoryPage = () => {
       totalValue: 90000,
       supplier: 'Gaming World',
       lastRestocked: '2024-10-18',
-      status: 'Low Stock'
+      status: 'Low Stock',
+      image: productImages[2]
     },
     {
       id: 3,
@@ -61,7 +66,8 @@ const InventoryPage = () => {
       totalValue: 0,
       supplier: 'Power Solutions',
       lastRestocked: '2024-10-10',
-      status: 'Out of Stock'
+      status: 'Out of Stock',
+      image: productImages[3]
     },
     {
       id: 4,
@@ -74,7 +80,8 @@ const InventoryPage = () => {
       totalValue: 700000,
       supplier: 'Office Plus',
       lastRestocked: '2024-10-22',
-      status: 'In Stock'
+      status: 'In Stock',
+      image: productImages[4]
     },
     {
       id: 5,
@@ -87,7 +94,8 @@ const InventoryPage = () => {
       totalValue: 280000,
       supplier: 'Gaming World',
       lastRestocked: '2024-10-15',
-      status: 'Low Stock'
+      status: 'Low Stock',
+      image: productImages[5]
     },
     {
       id: 6,
@@ -100,7 +108,8 @@ const InventoryPage = () => {
       totalValue: 742500,
       supplier: 'Tech Suppliers Ltd',
       lastRestocked: '2024-10-23',
-      status: 'In Stock'
+      status: 'In Stock',
+      image: productImages[6]
     }
   ];
 
@@ -114,7 +123,8 @@ const InventoryPage = () => {
     stock: '',
     reorderLevel: '',
     unitPrice: '',
-    supplier: ''
+    supplier: '',
+    image: ''
   });
 
   // Edit Product Form State
@@ -125,8 +135,13 @@ const InventoryPage = () => {
     stock: '',
     reorderLevel: '',
     unitPrice: '',
-    supplier: ''
+    supplier: '',
+    image: ''
   });
+
+  // Image preview states
+  const [newProductImagePreview, setNewProductImagePreview] = useState('');
+  const [editProductImagePreview, setEditProductImagePreview] = useState('');
 
   // Generate product code
   const generateProductCode = () => {
@@ -143,8 +158,10 @@ const InventoryPage = () => {
       stock: '',
       reorderLevel: '',
       unitPrice: '',
-      supplier: ''
+      supplier: '',
+      image: ''
     });
+    setNewProductImagePreview('');
   };
 
   // Open add product modal
@@ -163,8 +180,10 @@ const InventoryPage = () => {
       stock: product.stock,
       reorderLevel: product.reorderLevel,
       unitPrice: product.unitPrice,
-      supplier: product.supplier
+      supplier: product.supplier,
+      image: product.image || ''
     });
+    setEditProductImagePreview(product.image || '');
     setShowEditProductModal(true);
   };
 
@@ -174,6 +193,11 @@ const InventoryPage = () => {
       ...prev,
       [field]: value
     }));
+
+    // Update image preview when image URL changes
+    if (field === 'image') {
+      setNewProductImagePreview(value);
+    }
   };
 
   // Handle edit product form changes
@@ -182,6 +206,43 @@ const InventoryPage = () => {
       ...prev,
       [field]: value
     }));
+
+    // Update image preview when image URL changes
+    if (field === 'image') {
+      setEditProductImagePreview(value);
+    }
+  };
+
+  // Handle image file upload for add product
+  const handleAddProductImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setNewProductImagePreview(e.target.result);
+        setNewProduct(prev => ({
+          ...prev,
+          image: e.target.result
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Handle image file upload for edit product
+  const handleEditProductImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setEditProductImagePreview(e.target.result);
+        setEditProduct(prev => ({
+          ...prev,
+          image: e.target.result
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   // Calculate product status based on stock and reorder level
@@ -206,7 +267,8 @@ const InventoryPage = () => {
       totalValue: parseInt(newProduct.stock) * parseInt(newProduct.unitPrice),
       supplier: newProduct.supplier,
       lastRestocked: new Date().toISOString().split('T')[0],
-      status: calculateStatus(parseInt(newProduct.stock), parseInt(newProduct.reorderLevel))
+      status: calculateStatus(parseInt(newProduct.stock), parseInt(newProduct.reorderLevel)),
+      image: newProduct.image || defaultProductImage
     };
 
     setInventory(prev => [...prev, product]);
@@ -228,7 +290,8 @@ const InventoryPage = () => {
       unitPrice: parseInt(editProduct.unitPrice),
       totalValue: parseInt(editProduct.stock) * parseInt(editProduct.unitPrice),
       supplier: editProduct.supplier,
-      status: calculateStatus(parseInt(editProduct.stock), parseInt(editProduct.reorderLevel))
+      status: calculateStatus(parseInt(editProduct.stock), parseInt(editProduct.reorderLevel)),
+      image: editProduct.image || editingProduct.image || defaultProductImage
     };
 
     setInventory(prev => 
@@ -397,10 +460,10 @@ const InventoryPage = () => {
               <div className="inv-card-body">
                 <div className="inv-item-image">
                   <img 
-                    src={productImages[item.id]} 
+                    src={item.image} 
                     alt={item.name}
                     onError={(e) => {
-                      e.target.src = 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+                      e.target.src = defaultProductImage;
                     }}
                   />
                 </div>
@@ -469,11 +532,50 @@ const InventoryPage = () => {
                 className="modal-close"
                 onClick={() => setShowAddProductModal(false)}
               >
-                ×
+                <IconX size={24} />
               </button>
             </div>
 
             <form onSubmit={handleAddProduct} className="modal-body">
+              {/* Image Upload Section */}
+              <div className="image-upload-section">
+                <div className="image-preview">
+                  {newProductImagePreview ? (
+                    <img src={newProductImagePreview} alt="Product preview" />
+                  ) : (
+                    <div className="image-placeholder">
+                      <IconPhoto size={48} />
+                      <span>Product Image Preview</span>
+                    </div>
+                  )}
+                </div>
+                <div className="image-upload-controls">
+                  <div className="form-group">
+                    <label className="form-label">Product Image</label>
+                    <div className="image-upload-options">
+                      <label className="file-upload-btn">
+                        <IconUpload size={16} />
+                        <span>Upload Image</span>
+                        <input 
+                          type="file" 
+                          accept="image/*"
+                          onChange={handleAddProductImageUpload}
+                          style={{ display: 'none' }}
+                        />
+                      </label>
+                      <span className="upload-or">OR</span>
+                      <input 
+                        type="url"
+                        className="form-input"
+                        placeholder="Enter image URL"
+                        value={newProduct.image}
+                        onChange={(e) => handleAddProductChange('image', e.target.value)}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="form-grid">
                 <div className="form-group">
                   <label className="form-label">
@@ -608,11 +710,50 @@ const InventoryPage = () => {
                 className="modal-close"
                 onClick={() => setShowEditProductModal(false)}
               >
-                ×
+                <IconX size={24} />
               </button>
             </div>
 
             <form onSubmit={handleUpdateProduct} className="modal-body">
+              {/* Image Upload Section */}
+              <div className="image-upload-section">
+                <div className="image-preview">
+                  {editProductImagePreview ? (
+                    <img src={editProductImagePreview} alt="Product preview" />
+                  ) : (
+                    <div className="image-placeholder">
+                      <IconPhoto size={48} />
+                      <span>Product Image Preview</span>
+                    </div>
+                  )}
+                </div>
+                <div className="image-upload-controls">
+                  <div className="form-group">
+                    <label className="form-label">Product Image</label>
+                    <div className="image-upload-options">
+                      <label className="file-upload-btn">
+                        <IconUpload size={16} />
+                        <span>Upload Image</span>
+                        <input 
+                          type="file" 
+                          accept="image/*"
+                          onChange={handleEditProductImageUpload}
+                          style={{ display: 'none' }}
+                        />
+                      </label>
+                      <span className="upload-or">OR</span>
+                      <input 
+                        type="url"
+                        className="form-input"
+                        placeholder="Enter image URL"
+                        value={editProduct.image}
+                        onChange={(e) => handleEditProductChange('image', e.target.value)}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="form-grid">
                 <div className="form-group">
                   <label className="form-label">
@@ -747,7 +888,7 @@ const InventoryPage = () => {
                 className="modal-close"
                 onClick={() => setShowRestockModal(false)}
               >
-                ×
+                <IconX size={24} />
               </button>
             </div>
 
@@ -755,10 +896,10 @@ const InventoryPage = () => {
               <div className="restock-item-info">
                 <div className="restock-image">
                   <img 
-                    src={productImages[selectedItem.id]} 
+                    src={selectedItem.image} 
                     alt={selectedItem.name}
                     onError={(e) => {
-                      e.target.src = 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+                      e.target.src = defaultProductImage;
                     }}
                   />
                 </div>
@@ -828,7 +969,7 @@ const InventoryPage = () => {
         </div>
       )}
 
-   
+    
     </>
   );
 };

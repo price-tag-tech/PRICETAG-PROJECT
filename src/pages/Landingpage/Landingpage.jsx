@@ -9,6 +9,7 @@ import Products from './Pages/Products/Products';
 import StoresList from './Pages/StoresList/StoresList';
 import Store from './Pages/StoresList/Store';
 import Services from './Pages/Services/Services';
+import ProductDetails from './Pages/Products/ProductDetails';
 
 const Landingpage = () => {
   return (
@@ -18,6 +19,7 @@ const Landingpage = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/product-detail/:id" element={<ProductDetails />} />
         <Route path="/stores" element={<StoresList />} />
         <Route path="/store/:id" element={<Store />} />
         <Route path="/services" element={<Services />} />
