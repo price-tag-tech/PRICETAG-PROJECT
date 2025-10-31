@@ -4043,14 +4043,13 @@
 }
 
 .stx-btn-primary {
-    background: var(--color-green, #10b981);
+    background: var(--main-green);
     color: white;
 }
 
 .stx-btn-primary:hover:not(:disabled) {
-    background: #059669;
+   color: white;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
 .stx-btn-primary:disabled {

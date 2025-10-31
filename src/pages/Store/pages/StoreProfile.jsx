@@ -34,6 +34,11 @@ const StoreProfile = () => {
   const [cardNumber, setCardNumber] = useState('•••• •••• •••• 4242');
   const [cardExpiry, setCardExpiry] = useState('12/25');
   const [cardCVC, setCardCVC] = useState('123');
+  const [bankDetails, setBankDetails] = useState({
+    accountName: '',
+    bankName: '',
+    accountNumber: ''
+  });
 
   // Security State
   const [twoFactorAuth, setTwoFactorAuth] = useState(false);
@@ -60,6 +65,15 @@ const StoreProfile = () => {
     address: '',
     currency: 'NGN',
     terms: 'Due upon receipt'
+  });
+
+  // Store Payment Receiving Methods (for customers to pay to the store)
+  const [storePaymentMethods, setStorePaymentMethods] = useState({
+    bankAccount: {
+      accountName: '',
+      bankName: '',
+      accountNumber: ''
+    }
   });
 
   const userPlan = 'Pro';
@@ -151,6 +165,7 @@ const StoreProfile = () => {
   const tabs = [
     { id: 'general', label: 'General', icon: IconBuildingStore },
     { id: 'billing', label: 'Billing & Plans', icon: IconCreditCard },
+    { id: 'storePayments', label: 'Store Payments', icon: IconCreditCard },
     { id: 'security', label: 'Security', icon: IconShield },
     { id: 'notifications', label: 'Notifications', icon: IconBell },
     { id: 'invoices', label: 'Invoice Settings', icon: IconReceipt }
@@ -337,6 +352,81 @@ const StoreProfile = () => {
           </>
         );
 
+      case 'storePayments':
+        return (
+          <>
+            <div className="ptf-section-card">
+              <div className="ptf-section-header">
+                <h2 className="ptf-section-title">Payment Receiving Methods</h2>
+                <p className="ptf-section-description">Configure payment methods that customers will use to pay for products from your store</p>
+              </div>
+
+              {/* Bank Account Details */}
+              <div className="ptf-section-header" style={{ marginTop: '24px', marginBottom: '16px' }}>
+                <h3 className="ptf-section-title" style={{ fontSize: '18px' }}>Bank Account</h3>
+                <p className="ptf-section-description" style={{ fontSize: '14px' }}>Add your bank account details where customers can make payments</p>
+              </div>
+
+              <div className="ptf-card-form">
+                <div className="ptf-form-group">
+                  <label className="ptf-form-label">Account Name</label>
+                  <input
+                    type="text"
+                    value={storePaymentMethods.bankAccount.accountName}
+                    onChange={(e) =>
+                      setStorePaymentMethods(prev => ({
+                        ...prev,
+                        bankAccount: {
+                          ...prev.bankAccount,
+                          accountName: e.target.value
+                        }
+                      }))
+                    }
+                    className="ptf-form-input"
+                    placeholder="e.g. John Doe"
+                  />
+                </div>
+                <div className="ptf-form-group">
+                  <label className="ptf-form-label">Bank Name</label>
+                  <input
+                    type="text"
+                    value={storePaymentMethods.bankAccount.bankName}
+                    onChange={(e) =>
+                      setStorePaymentMethods(prev => ({
+                        ...prev,
+                        bankAccount: {
+                          ...prev.bankAccount,
+                          bankName: e.target.value
+                        }
+                      }))
+                    }
+                    className="ptf-form-input"
+                    placeholder="e.g. Access Bank, GTBank, First Bank"
+                  />
+                </div>
+                <div className="ptf-form-group">
+                  <label className="ptf-form-label">Account Number</label>
+                  <input
+                    type="text"
+                    value={storePaymentMethods.bankAccount.accountNumber}
+                    onChange={(e) =>
+                      setStorePaymentMethods(prev => ({
+                        ...prev,
+                        bankAccount: {
+                          ...prev.bankAccount,
+                          accountNumber: e.target.value
+                        }
+                      }))
+                    }
+                    className="ptf-form-input"
+                    placeholder="e.g. 0123456789"
+                  />
+                </div>
+              </div>
+            </div>
+          </>
+        );
+
       case 'billing':
         return (
           <>
@@ -393,16 +483,7 @@ const StoreProfile = () => {
                   />
                   <label htmlFor="card">Credit/Debit Card</label>
                 </div>
-                <div className="ptf-payment-method">
-                  <input 
-                    type="radio" 
-                    id="bank" 
-                    name="payment" 
-                    checked={paymentMethod === 'bank'}
-                    onChange={() => setPaymentMethod('bank')}
-                  />
-                  <label htmlFor="bank">Bank Transfer</label>
-                </div>
+               
               </div>
 
               {paymentMethod === 'card' && (
@@ -441,6 +522,7 @@ const StoreProfile = () => {
                   </div>
                 </div>
               )}
+            
             </div>
 
             {/* Billing History */}

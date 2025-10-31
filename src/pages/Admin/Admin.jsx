@@ -1,18 +1,110 @@
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
+import { useState } from "react";
+import "../UserDashboard/Styles/style.css";
+import "./Styles/admin.css";
+import AdminSideNavbar from "./Components/AdminSideNavbar";
+import AdminTopNavbar from "./Components/AdminTopNavbar";
+
+// Super Admin Pages
+import Dashboard from "./Pages/Dashboard";
+import ManageUsers from "./Pages/ManageUsers";
+import ManageAdmins from "./Pages/ManageAdmins";
+import PlatformSettings from "./Pages/PlatformSettings";
+import BroadcastCenter from "./Pages/BroadcastCenter";
+import ActivityLogs from "./Pages/ActivityLogs";
+import Reports from "./Pages/Reports";
+import AdminSettings from "./Pages/AdminSettings";
+
+// User Registration Admin Pages
+import NewUserRequests from "./Pages/NewUserRequests";
+import KYCReviews from "./Pages/KYCReviews";
+import BusinessVerification from "./Pages/BusinessVerification";
+import Reminders from "./Pages/Reminders";
+import SuspendedAccounts from "./Pages/SuspendedAccounts";
+
+// Support Admin Pages
+import SupportTickets from "./Pages/SupportTickets";
+import LiveChat from "./Pages/LiveChat";
+import ReviewsRatings from "./Pages/ReviewsRatings";
+import CustomerFeedback from "./Pages/CustomerFeedback";
+import SatisfactionReports from "./Pages/SatisfactionReports";
+
+// Finance Admin Pages
+import PayoutRequests from "./Pages/PayoutRequests";
+import AffiliateManagement from "./Pages/AffiliateManagement";
+import RevenueOverview from "./Pages/RevenueOverview";
+import Expenses from "./Pages/Expenses";
+import PaymentGateways from "./Pages/PaymentGateways";
 
 const Admin = () => {
-   useDocumentTitle("Admin");
+  useDocumentTitle("Admin Dashboard");
+  const location = useLocation();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // TODO: Get admin role from authentication context
+  // For now, defaulting to superAdmin
+  const adminRole = 'superAdmin'; // Can be: 'superAdmin', 'userRegistration', 'support', 'finance'
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   return (
-    <div>
-      <h1>Admin Page </h1>
-      <p>Please maintain (#222325) it is our primary color, dont use the green color ok, maintain this blakc color code especially in you button background 
-        and border, check the index.css i have listed all the custume btn colors and radius to be used, please maintain a steady design, also study the 
-        landing page and see how i arranged it and did the routing. Please the routing in the App.jsx is the global routing try as much as posible to be very careful while doing anything there.
-        before you do do anything on the App.jsx tell me first, am always here to guide you, so always ask me questions incase you dont understand some things
-        especially the routing aspect. Also dont add any loader or loading animation, later we can figure that out togeter, no much asnimations ok. 
-        Also check the landing page - Components - Navbar, you wil see the icons we will be using in this project
-        (@heroicons and @tabular icons). If you dont understand anything always ask me. Dont make heavy installations ok. Always tell me before making any installations.
-      </p>
+    <div className="dashboard-body">
+      <div className="dashboard-grid">
+        <AdminSideNavbar 
+          isOpen={isSidebarOpen}
+          onClose={closeSidebar}
+          adminRole={adminRole}
+        />
+        
+        <div className="main-dashboard">        
+          <AdminTopNavbar 
+            onToggleSidebar={toggleSidebar}
+            isSidebarOpen={isSidebarOpen}
+          />
+          <div className="body-dash">
+            <Routes>
+              {/* Super Admin Routes */}
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/manage-users" element={<ManageUsers />} />
+              <Route path="/manage-admins" element={<ManageAdmins />} />
+              <Route path="/platform-settings" element={<PlatformSettings />} />
+              <Route path="/broadcast" element={<BroadcastCenter />} />
+              <Route path="/activity-logs" element={<ActivityLogs />} />
+              <Route path="/reports" element={<Reports />} />
+              <Route path="/settings" element={<AdminSettings />} />
+
+              {/* User Registration Admin Routes */}
+              <Route path="/new-user-requests" element={<NewUserRequests />} />
+              <Route path="/kyc-reviews" element={<KYCReviews />} />
+              <Route path="/business-verification" element={<BusinessVerification />} />
+              <Route path="/reminders" element={<Reminders />} />
+              <Route path="/suspended-accounts" element={<SuspendedAccounts />} />
+
+              {/* Support Admin Routes */}
+              <Route path="/support-tickets" element={<SupportTickets />} />
+              <Route path="/live-chat" element={<LiveChat />} />
+              <Route path="/reviews-ratings" element={<ReviewsRatings />} />
+              <Route path="/customer-feedback" element={<CustomerFeedback />} />
+              <Route path="/satisfaction-reports" element={<SatisfactionReports />} />
+
+              {/* Finance Admin Routes */}
+              <Route path="/payout-requests" element={<PayoutRequests />} />
+              <Route path="/affiliate-management" element={<AffiliateManagement />} />
+              <Route path="/revenue-overview" element={<RevenueOverview />} />
+              <Route path="/expenses" element={<Expenses />} />
+              <Route path="/payment-gateways" element={<PaymentGateways />} />
+            </Routes>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1988,6 +1988,7 @@ button.is-loading::before{
 .modal-body{
     max-height: 60vh;
     position: relative;
+    overflow-y: auto;
 }
 
 .location-loader{

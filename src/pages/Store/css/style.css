@@ -2118,7 +2118,7 @@
 .modal-actions {
     display: flex;
     gap: 12px;
-    margin-top: 24px;
+    margin-block: 24px;
 }
 
 .btn-secondary {
@@ -3915,6 +3915,8 @@
   border: 1px solid #e5e7eb;
   padding: 16px;
   height: fit-content;
+  position: sticky;
+  top: 70px;
 }
 
 .ptf-tab-btn {
@@ -4187,8 +4189,9 @@ input:checked + .ptf-toggle-slider:before {
 
   .ptf-settings-sidebar {
     display: flex;
-    overflow-x: auto;
+    flex-direction: column;
     gap: 8px;
+    position: static;
     padding: 12px;
   }
 

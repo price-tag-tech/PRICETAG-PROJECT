@@ -93,7 +93,7 @@ const StoreSidebar = ({ isOpen, onClose }) => {
 
   const handleAddStore = () => {
     setIsDropdownOpen(false);
-    navigate('/store-dashboard/create');
+    navigate('/user-dashboard/create-store');
   };
 
   const handleEditStore = () => {

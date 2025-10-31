@@ -1,4 +1,4 @@
-// StoreDisputeDetailPage.jsx
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
@@ -158,11 +158,7 @@ const StoreDisputeDetailPage = () => {
         console.log('Files to upload:', files);
     };
 
-    const handleQuickAction = (action) => {
-        setActiveAction(action);
-        // Implement quick action logic based on the action type
-        console.log('Quick action:', action);
-    };
+  
 
     const useTemplate = (template) => {
         setMessage(template.message);
@@ -369,42 +365,7 @@ const StoreDisputeDetailPage = () => {
                         <div className="sddp-dispute-info">
                             <h3 className="sddp-dispute-info__title">Dispute Management</h3>
 
-                            {/* Quick Actions for Store */}
-                            {dispute.status === 'pending' && (
-                                <div className="sddp-dispute-info__section">
-                                    <h4 className="sddp-dispute-info__section-title">Quick Actions</h4>
-                                    <div className="sddp-quick-actions">
-                                        <button
-                                            onClick={() => handleQuickAction('full_refund')}
-                                            className="sddp-quick-action sddp-quick-action--refund"
-                                        >
-                                            <IconCurrencyDollar size={20} />
-                                            <span>Offer Full Refund</span>
-                                        </button>
-                                        <button
-                                            onClick={() => handleQuickAction('replacement')}
-                                            className="sddp-quick-action sddp-quick-action--replace"
-                                        >
-                                            <IconPackage size={20} />
-                                            <span>Send Replacement</span>
-                                        </button>
-                                        <button
-                                            onClick={() => handleQuickAction('partial_refund')}
-                                            className="sddp-quick-action sddp-quick-action--partial"
-                                        >
-                                            <IconDiscount size={20} />
-                                            <span>Partial Refund</span>
-                                        </button>
-                                        <button
-                                            onClick={() => handleQuickAction('contact_customer')}
-                                            className="sddp-quick-action sddp-quick-action--contact"
-                                        >
-                                            <IconMail size={20} />
-                                            <span>Contact Customer</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
+                         
 
                             {/* Order Details */}
                             <div className="sddp-dispute-info__section">
