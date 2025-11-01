@@ -4170,3 +4170,252 @@ position: relative;
     width: 15px !important;
 }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* ServicesDetails-MM-Page */
+
+.ServicesDetails-MM-Page{
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    margin-top: 30px;
+}
+
+.ServicesDetails-MM{
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+.ServicesDetails-MM-1,
+.ServicesDetails-MM-2{
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.Oksu-TOop{
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+}
+
+.Oksu-TOop-1{
+    position: relative;
+}
+
+.Oksu-TOop-IMg{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    z-index: 1;
+    user-select: none;
+    cursor: pointer;
+}
+
+.Oksu-TOop-IMg img{
+    position: relative;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    object-fit: cover;
+    object-position: center;
+}
+
+.Oksu-TOop-IMg::before{
+    content: '';
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    border-radius: inherit;
+    border: 2px dashed #222325;
+    animation: RotateCnt 20s linear infinite;
+    -webkit-animation: RotateCnt 20s linear infinite;
+    -moz-animation: RotateCnt 20s linear infinite;
+}
+
+.Oksu-TOop-IMg span {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease-in-out;
+}
+.Oksu-TOop-IMg span svg{
+    width: 60%;
+}
+
+.Oksu-TOop-2{
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+.Oksu-TOop-2 p{
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #109367;
+}
+
+.Oksu-TOop-2 h3{
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+.Oksu-TOop-BTNs{
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+.Oksu-TOop-BTNs button{
+    position: relative;
+    width: auto;
+    min-height: 40px;
+    padding: 8px 15px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+    user-select: none;
+    cursor: pointer;
+}
+.Oksu-TOop-BTNs span{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+.Oksu-TOop-BTNs span svg{
+    width: 60%;
+}
+
+/* JUjs-po */
+
+.JUjs-po{
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.JUjs-po span{
+    position:relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.JUjs-po span.statusOS{
+    font-size: 13px;
+}
+.online-Sttaus{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 10px;
+    height: 10px;
+    background-color: #949494;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.online-Sttaus.online{
+    background-color: #10b981;
+}
+.online-Sttaus.offline{
+    background-color: #949494;
+}
+
+.OOIk-BBDYS{
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+}
+
+.OOIk-Part{
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    gap: 10px;
+    padding: 20px 0px;
+    border-bottom: 1px dashed #222325;
+}
+
+.OOIk-Part h3{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    gap: 10px;
+}
+.OOIk-Part h3 span{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+.OOIk-Part h3 span svg{
+    width: 15px;
+}
+
+.OOIk-Part p{
+    font-size: 15px;
+}
+
+.OOIk-Part h4{
+    font-size: 14px;
+    font-weight: 600;
+    color: #10b981;
+}
+.OOIk-Part h4 span{
+    font-weight: 400;
+    color: #A5A5A5;
+}

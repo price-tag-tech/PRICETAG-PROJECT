@@ -70,8 +70,8 @@ const stores = [
     ownerImg: StoreOwner1,
     owner: 'Mary Jane',
     location: 'Lagos State, Ikeja',
-    lat: 6.605874,
-    lng: 3.349149,
+    lat: 6.6018,
+    lng: 3.3515,
     products: 300,
     services: 3,
     memberSince: '10th Jan, 2023',
@@ -81,12 +81,12 @@ const stores = [
   {
     id: 2,
     banner: null,
-    name: 'Smart Haven',
+    name: 'TechCraft Hub',
     ownerImg: StoreOwner2,
     owner: 'Samuel Bright',
     location: 'FCT - Abuja, Wuse',
-    lat: 9.0747,
-    lng: 7.476,
+    lat: 9.0765,
+    lng: 7.3986,
     products: 520,
     services: 6,
     memberSince: '25th Mar, 2022',
@@ -96,12 +96,12 @@ const stores = [
   {
     id: 3,
     banner: null,
-    name: 'GlowMart',
+    name: 'Bella Beauty Store',
     ownerImg: StoreOwner3,
     owner: 'Isabella Cruz',
     location: 'Rivers State, Port Harcourt',
-    lat: 4.824167,
-    lng: 7.033611,
+    lat: 4.8156,
+    lng: 7.0498,
     products: 150,
     services: 4,
     memberSince: '18th Jul, 2023',
@@ -111,12 +111,12 @@ const stores = [
   {
     id: 4,
     banner: null,
-    name: 'TechZilla',
+    name: 'GreenLeaf Organics',
     ownerImg: StoreOwner4,
     owner: 'David Green',
     location: 'Oyo State, Ibadan',
-    lat: 7.376736,
-    lng: 3.939786,
+    lat: 7.3775,
+    lng: 3.9059,
     products: 220,
     services: 2,
     memberSince: '2nd Dec, 2021',
@@ -126,12 +126,12 @@ const stores = [
   {
     id: 5,
     banner: null,
-    name: 'CozyHome',
+    name: 'HomeEssence',
     ownerImg: StoreOwner1, // Reuse for demo
     owner: 'Sophia Turner',
     location: 'Delta State, Asaba',
     lat: 6.1982,
-    lng: 6.7321,
+    lng: 6.7317,
     products: 410,
     services: 5,
     memberSince: '9th Feb, 2024',
@@ -141,11 +141,11 @@ const stores = [
   {
     id: 6,
     banner: null,
-    name: 'Cool Breeze Stores',
+    name: 'Urban Wear',
     ownerImg: StoreOwner2, // Reuse for demo
     owner: 'Michael Adams',
     location: 'Kano State, Kano',
-    lat: 12.0000,
+    lat: 12.0001,
     lng: 8.5167,
     products: 340,
     services: 3,
@@ -156,8 +156,6 @@ const stores = [
 ];
 
 const ProductDetails = () => {
-  useDocumentTitle("Product Details");
-
   const { id } = useParams();
 
   const products = [
@@ -182,7 +180,7 @@ const ProductDetails = () => {
       oldPrice: '₦999.99', 
       save: '₦200', 
       ownerImg: StoreOwner2, 
-      owner: 'Smart Haven',
+      owner: 'TechCraft Hub',
       rating: 4.2,
       reviews: 220,
       verified: false
@@ -195,7 +193,7 @@ const ProductDetails = () => {
       oldPrice: '₦3,999.99', 
       save: '₦500', 
       ownerImg: StoreOwner3, 
-      owner: 'GlowMart',
+      owner: 'Bella Beauty Store',
       rating: 4.8,
       reviews: 180,
       verified: true
@@ -208,7 +206,7 @@ const ProductDetails = () => {
       oldPrice: '₦15,999.99', 
       save: '₦3,000', 
       ownerImg: StoreOwner4, 
-      owner: 'TechZilla',
+      owner: 'GreenLeaf Organics',
       rating: 4.6,
       reviews: 350,
       verified: false
@@ -221,7 +219,7 @@ const ProductDetails = () => {
       oldPrice: '₦3,000.00', 
       save: '₦500', 
       ownerImg: StoreOwner1, 
-      owner: 'CozyHome',
+      owner: 'HomeEssence',
       rating: 4.3,
       reviews: 120,
       verified: true
@@ -234,7 +232,7 @@ const ProductDetails = () => {
       oldPrice: '₦1,599.99', 
       save: '₦300', 
       ownerImg: StoreOwner2, 
-      owner: 'Cool Breeze Stores',
+      owner: 'Urban Wear',
       rating: 4.7,
       reviews: 280,
       verified: false
@@ -247,7 +245,7 @@ const ProductDetails = () => {
       oldPrice: '₦2,499.99', 
       save: '₦500', 
       ownerImg: StoreOwner3, 
-      owner: 'GlowMart',
+      owner: 'Bella Beauty Store',
       rating: 4.4,
       reviews: 90,
       verified: true
@@ -260,7 +258,7 @@ const ProductDetails = () => {
       oldPrice: '₦10,999.99', 
       save: '₦2,000', 
       ownerImg: StoreOwner4, 
-      owner: 'TechZilla',
+      owner: 'GreenLeaf Organics',
       rating: 4.5,
       reviews: 200,
       verified: false
@@ -286,7 +284,7 @@ const ProductDetails = () => {
       oldPrice: '₦3,999.99', 
       save: '₦500', 
       ownerImg: StoreOwner2, 
-      owner: 'Smart Haven',
+      owner: 'TechCraft Hub',
       rating: 4.7,
       reviews: 240,
       verified: false
@@ -299,7 +297,7 @@ const ProductDetails = () => {
       oldPrice: '₦1,999.99', 
       save: '₦500', 
       ownerImg: StoreOwner3, 
-      owner: 'GlowMart',
+      owner: 'Bella Beauty Store',
       rating: 4.3,
       reviews: 110,
       verified: true
@@ -312,7 +310,7 @@ const ProductDetails = () => {
       oldPrice: '₦6,999.99', 
       save: '₦1,000', 
       ownerImg: StoreOwner4, 
-      owner: 'TechZilla',
+      owner: 'GreenLeaf Organics',
       rating: 4.8,
       reviews: 300,
       verified: false
@@ -325,7 +323,7 @@ const ProductDetails = () => {
       oldPrice: '₦29,999.99', 
       save: '₦4,000', 
       ownerImg: StoreOwner1, 
-      owner: 'CozyHome',
+      owner: 'HomeEssence',
       rating: 4.4,
       reviews: 210,
       verified: true
@@ -338,7 +336,7 @@ const ProductDetails = () => {
       oldPrice: '₦5,499.99', 
       save: '₦1,000', 
       ownerImg: StoreOwner2, 
-      owner: 'Cool Breeze Stores',
+      owner: 'Urban Wear',
       rating: 4.6,
       reviews: 190,
       verified: false
@@ -351,7 +349,7 @@ const ProductDetails = () => {
       oldPrice: '₦3,499.99', 
       save: '₦500', 
       ownerImg: StoreOwner3, 
-      owner: 'GlowMart',
+      owner: 'Bella Beauty Store',
       rating: 4.2,
       reviews: 140,
       verified: true
@@ -364,7 +362,7 @@ const ProductDetails = () => {
       oldPrice: '₦22,999.99', 
       save: '₦4,000', 
       ownerImg: StoreOwner4, 
-      owner: 'TechZilla',
+      owner: 'GreenLeaf Organics',
       rating: 4.7,
       reviews: 420,
       verified: false
@@ -390,7 +388,7 @@ const ProductDetails = () => {
       oldPrice: '₦18,499.99', 
       save: '₦3,000', 
       ownerImg: StoreOwner2, 
-      owner: 'Smart Haven',
+      owner: 'TechCraft Hub',
       rating: 4.3,
       reviews: 260,
       verified: false
@@ -400,8 +398,11 @@ const ProductDetails = () => {
   const product = products.find(p => p.id === parseInt(id));
 
   if (!product) {
+    useDocumentTitle("Product not found");
     return <div>Product not found</div>;
   }
+
+  useDocumentTitle(product.title);
 
   // Find the corresponding store based on product.owner (store name)
   const store = stores.find(s => s.name === product.owner);
@@ -410,17 +411,7 @@ const ProductDetails = () => {
     return <div>Store not found for this product</div>;
   }
 
-  // Map of store names to IDs for routing
-  const storeIds = {
-    'MJ Ventures': 1,
-    'Smart Haven': 2,
-    'GlowMart': 3,
-    'TechZilla': 4,
-    'CozyHome': 5,
-    'Cool Breeze Stores': 6,
-  };
-
-  const storeId = storeIds[product.owner] || 1; // Fallback to 1 if not found
+  const storeId = store.id;
 
   const [showContact, setShowContact] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
@@ -682,14 +673,14 @@ const ProductDetails = () => {
                              <div className="BBy-SeL">
                               <div className="BBy-SeL-1"><span>Owner:</span></div>
                               <div className="BBy-SeL-2">
-                                <b><img src={store.ownerImg} alt="Store Owner" /></b>
+                                <b><img src={store.ownerImg} alt={store.owner} /></b>
                                 <h6><span>{store.owner}</span></h6>
                               </div>
                             </div>
-                            <a href="#" className="ProdStore-OwN">
+                            <Link to={`/store/${storeId}`} className="ProdStore-OwN">
                               <b>{product.owner}</b>
                               <span className={`VVef-Badge ${product.verified ? 'verified' : 'unverified'}`}>{product.verified ? 'Verified' : 'Unverified'}</span>
-                            </a>
+                            </Link>
                             <p className="Mebe-SunP"><UserCircleIcon />Member since {store.memberSince}</p>
 
                             <div className="Oks-BTNS">
