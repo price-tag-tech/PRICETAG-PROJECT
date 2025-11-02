@@ -9,8 +9,20 @@ import {
   BanknotesIcon,
   StarIcon,
   ChatBubbleBottomCenterTextIcon,
+  MinusIcon,
+  ShareIcon,
+  FlagIcon,
 } from "@heroicons/react/24/outline";
 import StoreOwner1 from "../../../../assets/images/Store/Owners/1.jpg";
+
+
+import Portfolio1 from '../../../../assets/images/Portfolio/1.jpg';
+import Portfolio2 from '../../../../assets/images/Portfolio/2.jpg';
+import Portfolio3 from '../../../../assets/images/Portfolio/3.jpg';
+import Portfolio4 from '../../../../assets/images/Portfolio/4.jpg';
+
+import ServicesReviewSec from './ServicesReviewSec';
+
 
 const ServicesDetails = () => {
   return (
@@ -49,6 +61,24 @@ const ServicesDetails = () => {
               </span>
               <span className="VVef-Badge verified">Verified</span>
             </div>
+
+               <div className="Rafs-BABst">
+
+                  <div className="Prodduc-BansSPlY">
+                          <div className="Prodduc-BansSPlY-Top poprtliosImg">
+                               <img  src={Portfolio1}   />
+                                  <button>
+                                    <EyeIcon />
+                                 </button>
+                           </div>
+                         <div className="Prodduc-BansSPlY-Footer">
+                         <span className="active"><img src={Portfolio1} /> </span>
+                         <span><img src={Portfolio2} /></span>
+                         <span><img src={Portfolio3} /></span>
+                         <span><img src={Portfolio4} /></span>
+                     </div>
+                 </div>
+              </div>
 
             <div className="OOIk-BBDYS">
               <div className="OOIk-Part">
@@ -109,9 +139,28 @@ const ServicesDetails = () => {
                 <p>300</p>
               </div>
             </div>
+
+            <div className="Rafs-BABst">
+              <h3>About me</h3>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+            </div>
+
+           
+
+
+                <div className="OOks-Btns">
+                    <button className="share-Btn custom-btn-radius" >
+                        <ShareIcon /> Share 
+                   </button>
+                  <a href="#" className="report-Btn custom-btn-radius"><FlagIcon /> Report Abuse</a>
+                </div>
+
+
           </div>
 
-          <div className="ServicesDetails-MM-2"></div>
+          <div className="ServicesDetails-MM-2">
+            <ServicesReviewSec />
+          </div>
         </div>
       </div>
     </div>

@@ -2859,6 +2859,7 @@ position: relative;
 	white-space: nowrap;
 	font-weight: 400;
 	font-size: 12px;
+    width: 50px;
 }
 .progress{
 	position: relative;
@@ -2998,11 +2999,11 @@ position: relative;
 	height: auto;
 	display: grid;
 	grid-template-columns: 0.5fr 1fr;
-	grid-gap: 80px;
+	gap: 30px;
 }
 @media screen and (max-width:700px){
 	.s-comment{
-		grid-gap: 40px !important;
+		gap: 20px !important;
 	}
 }
 @media screen and (max-width:700px){
@@ -3048,8 +3049,8 @@ position: relative;
 
 .s-comment-10 span{
 	position: relative;
-	width: 50px;
-	height: 50px;
+	width: 45px;
+	height: 45px;
 	background: #222325;
 	color: #ffffff;
 	display: inline-flex;
@@ -3068,7 +3069,7 @@ position: relative;
 	height: auto;
 }
 .s-comment-11 span{
-	font-size: 15px;
+	font-size: 14px;
 	font-weight: 500;
 }
 .s-comment-11 p{
@@ -3369,6 +3370,12 @@ position: relative;
     object-fit: cover;
     object-position: center;
     border-radius: 5px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.Prodduc-BansSPlY-Top.poprtliosImg img{
+    max-height: 500px;
 }
 
 .Prodduc-BansSPlY-Top button{
@@ -3428,6 +3435,21 @@ position: relative;
     border: 3px solid transparent;
     opacity: 0.7;
     transition: all 0.3s ease-in-out;
+}
+@media screen and (max-width:500px){
+.Prodduc-BansSPlY-Footer span{
+    width: 100% !important;
+}
+}
+@media screen and (max-width:400px){
+.Prodduc-BansSPlY-Footer span{
+   height: 60px !important;
+}
+}
+@media screen and (max-width:300px){
+.Prodduc-BansSPlY-Footer span{
+   height: 50px !important;
+}
 }
 .Prodduc-BansSPlY-Footer span img{
     position: relative;
@@ -3877,7 +3899,7 @@ position: relative;
 
 
 
-/* ProductDetails-MaiNn-2DlTS-4 */
+/* ProductDetails-MaiNn-2DlTS-3 */
 
 .ProductDetails-MaiNn-2DlTS-3{
      position: relative;
@@ -4198,7 +4220,7 @@ position: relative;
     height: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 50px;
+    gap: 100px;
 }
 
 .ServicesDetails-MM-1,
@@ -4418,4 +4440,247 @@ position: relative;
 .OOIk-Part h4 span{
     font-weight: 400;
     color: #A5A5A5;
+}
+
+
+/* Rafs-BABst */
+
+.Rafs-BABst{
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+    display: block;
+}
+
+.Rafs-BABst h3{
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom:10px;
+}
+
+.Rafs-BABst p{
+    font-size: 15px;
+}
+
+
+
+
+
+
+.Rafs-BABst ul{
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.Rafs-BABst ul li{
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 15px;
+     padding: 3px 0px;
+}
+
+.Rafs-BABst ul li svg{
+    width: 15px;
+     color: #b4b4b4;
+}
+
+
+
+
+
+
+
+
+.OOks-Btns{
+     position: relative;
+    width: 100%;
+    height: auto;
+    display:flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+@media screen and (max-width:400px){
+    .OOks-Btns{
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .Oks-BTNS button ,
+    .OOks-Btns a,
+.OOks-Btns button{
+    font-size: 13px !important;
+}
+.Oks-BTNS button  svg,
+.OOks-Btns a svg,
+.OOks-Btns button svg{
+    width: 13px !important;
+}
+}
+
+.OOks-Btns a,
+.OOks-Btns button{
+    position: relative;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    min-height: 45px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+    user-select: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+.OOks-Btns a svg,
+.OOks-Btns button svg{
+    width: 15px;
+}
+
+
+
+.share-Btn{
+    border-color: #3b82f6 !important;
+    color: #3b82f6 !important;
+}
+.share-Btn:hover{
+    background-color: #f4f7fc !important;
+}
+.report-Btn{
+    border-color: #b91c1c !important;
+    color: #b91c1c !important;
+}
+
+.report-Btn:hover{
+    background-color: #fdf5f5 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ServicesDetails-MM-2 */
+
+.ServicesDetails-MM-2{
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.ServicesReviewSec{
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.ServicesReviewSec-TOp{
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.ServicesReviewSec-TOp h3{
+    font-size: 17px;
+    font-weight: 600;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.ServicesReviewSec-TOp h3 span{
+    font-size: 14px;
+    font-weight: 400;
+    color: #7d7d7d;
+}
+
+/* HYHs-OOPPros */
+
+.HYHs-OOPPros{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    margin-top: 20px;
+}
+.HYHs-OOPPros h2{
+    flex-direction: column !important;
+    gap: 5px !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: center !important;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.HYHs-OOPPros h2 b{
+    line-height: 100% !important;
+    font-size: 60px !important;
+}
+
+.HYHs-OOPPros h2  span{
+    font-size: 13px !important;
+}
+
+
+/* Statis-Sec */
+
+.Statis-Sec{
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+}
+
+.Statis-Sec h3{
+    font-size: 17px;
+    font-weight: 600;
+    width: 100%;
+    position: relative;
+}
+
+
+
+
+
+
+/* dass-Rev-COnats */
+
+.dass-Rev-COnats{
+    position: relative;
+    width: 100%;
+    height: 240px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.dass-Rev-COnats svg{
+    margin-left: -20px !important;
 }
