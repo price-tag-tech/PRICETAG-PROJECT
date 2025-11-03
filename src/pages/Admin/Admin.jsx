@@ -9,7 +9,7 @@ import AdminTopNavbar from "./Components/AdminTopNavbar";
 // Super Admin Pages
 import Dashboard from "./Pages/Dashboard";
 import ManageUsers from "./Pages/ManageUsers";
-import ManageStores from "./Pages/ManageStores";
+import ManageStores from "./Pages/ManageBusiness";
 import ManageAdmins from "./Pages/ManageAdmins";
 import DisputeResolution from "./Pages/DisputeResolution";
 import PlatformSettings from "./Pages/PlatformSettings";
@@ -38,7 +38,7 @@ import AffiliateManagement from "./Pages/AffiliateManagement";
 import RevenueOverview from "./Pages/RevenueOverview";
 import Expenses from "./Pages/Expenses";
 import PaymentGateways from "./Pages/PaymentGateways";
-import ManageBusiness from "./Pages/ManageStores";
+import ManageBusiness from "./Pages/ManageBusiness";
 import BusinessDetails from "./Pages/BuisnessDetails";
 import AdminDisputeDetailPage from "./Pages/AdminDisputeDetailsPage";
 

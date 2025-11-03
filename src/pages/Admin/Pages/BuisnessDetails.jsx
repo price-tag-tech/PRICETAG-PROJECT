@@ -84,9 +84,7 @@ const BusinessDetails = () => {
     navigate('/admin/manage-business');
   };
 
-  const handleEditBusiness = () => {
-    console.log('Edit business');
-  };
+
 
   const handleSuspendBusiness = () => {
     console.log('Suspend business');
@@ -128,10 +126,7 @@ const BusinessDetails = () => {
             </div>
           </div>
           <div className="info-actions-bd">
-            <button onClick={handleEditBusiness} className="btn-secondary-bd">
-              <IconEdit size={18} />
-              Edit
-            </button>
+            
             {business.status === 'Active' ? (
               <button onClick={handleSuspendBusiness} className="btn-danger-bd">
                 <IconBan size={18} />
