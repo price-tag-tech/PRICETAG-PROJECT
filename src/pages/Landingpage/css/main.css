@@ -2442,7 +2442,9 @@ img.Store-Banner-Img{
     align-items: center;
     gap: 10px;
 }
-
+.GGhs-BtnS .Oks-BTNS-Gen-Drop{
+    color: #222325 !important;
+}
 .GGhs-BtnS button{
     position: relative;
     width: auto;

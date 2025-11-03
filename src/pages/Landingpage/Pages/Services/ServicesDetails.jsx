@@ -500,6 +500,7 @@ const ServicesDetails = () => {
             ref={mapModalRef}
             onClick={(e) => e.stopPropagation()}
             style={{ maxWidth: '700px' }}
+            
           >
             <div className="modal-header">
               <h3>Store Location</h3>

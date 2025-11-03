@@ -157,10 +157,13 @@ const Store = () => {
   const [userLat, setUserLat] = useState(null);
   const [userLng, setUserLng] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [showContact, setShowContact] = useState(false);
+  const [copiedContact, setCopiedContact] = useState({ first: false, second: false });
 
   const categoriesRef = useRef(null);
   const shareModalRef = useRef(null);
   const mapModalRef = useRef(null);
+  const contactRef = useRef(null);
 
   const shareLink = `${window.location.origin}/store/${store.id}`;
 
@@ -183,6 +186,18 @@ const Store = () => {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const distance = R * c;
     return Math.round(distance);
+  };
+
+  const copyToClipboard = async (text, key) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedContact(prev => ({ ...prev, [key]: true }));
+      setTimeout(() => {
+        setCopiedContact(prev => ({ ...prev, [key]: false }));
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
   };
 
   useEffect(() => {
@@ -209,11 +224,14 @@ const Store = () => {
       if (showMapModal && mapModalRef.current && !mapModalRef.current.contains(e.target)) {
         setShowMapModal(false);
       }
+      if (showContact && contactRef.current && !contactRef.current.contains(e.target)) {
+        setShowContact(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClick);
     return () => document.removeEventListener('mousedown', handleClick);
-  }, [showShareModal, showMapModal]);
+  }, [showShareModal, showMapModal, showContact]);
 
   const handleCopy = async () => {
     try {
@@ -425,7 +443,55 @@ const Store = () => {
            <h3 className="big-text">Looking Expensive with Italina Wears</h3>
           <p>Delivering quality products and reliable services designed to exceed your expectations.</p>
           <div className="GGhs-BtnS">
-            <button><PhoneIcon /> Contact Store</button>
+            <div className="Hghhs-Btnca" ref={contactRef}>
+              <button 
+                className="custom-btn-radius"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowContact(prev => !prev);
+                }}
+              >
+                <PhoneIcon /> Contact Store
+              </button>
+              <AnimatePresence>
+                {showContact && (
+                  <motion.div
+                    className="Oks-BTNS-Gen-Drop"
+                    initial={{ y: -20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -20, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ul className="AGhs-Ul">
+                      <li>
+                        <span><PhoneIcon /><b>09037494084</b></span>
+                        <span 
+                          className="Serve-Sab-Batn" 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            copyToClipboard('09037494084', 'first');
+                          }}
+                        >
+                          {copiedContact.first ? 'Copied!' : 'Copy'}
+                        </span>
+                      </li>
+                      <li>
+                        <span><PhoneIcon /><b>08101317299</b></span>
+                        <span 
+                          className="Serve-Sab-Batn" 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            copyToClipboard('08101317299', 'second');
+                          }}
+                        >
+                          {copiedContact.second ? 'Copied!' : 'Copy'}
+                        </span>
+                      </li>
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
             <button className="Store-Map-Btn" onClick={handleMapToggle}>
               <MapPinIcon /> 
             </button>
