@@ -11,6 +11,7 @@ import Store from './Pages/StoresList/Store';
 import Services from './Pages/Services/Services';
 import ProductDetails from './Pages/Products/ProductDetails';
 import ServicesDetails from './Pages/Services/ServicesDetails';
+import BusinessRegisteration from './Pages/BusinessRegisteration/BusinessRegisteration';
 
 const Landingpage = () => {
   return (
@@ -25,6 +26,7 @@ const Landingpage = () => {
         <Route path="/store/:id" element={<Store />} />
         <Route path="/services" element={<Services />} />
         <Route path="/service/:id" element={<ServicesDetails />} />
+        <Route path="/open-store" element={<BusinessRegisteration />} />
       </Routes>
       <Footer />
     </div>
