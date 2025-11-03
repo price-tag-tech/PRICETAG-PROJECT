@@ -10,6 +10,7 @@ import StoresList from './Pages/StoresList/StoresList';
 import Store from './Pages/StoresList/Store';
 import Services from './Pages/Services/Services';
 import ProductDetails from './Pages/Products/ProductDetails';
+import ServicesDetails from './Pages/Services/ServicesDetails';
 
 const Landingpage = () => {
   return (
@@ -23,6 +24,7 @@ const Landingpage = () => {
         <Route path="/stores" element={<StoresList />} />
         <Route path="/store/:id" element={<Store />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/service/:id" element={<ServicesDetails />} />
       </Routes>
       <Footer />
     </div>

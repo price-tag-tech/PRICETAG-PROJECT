@@ -53,7 +53,7 @@ const StoreProducts = ({ store }) => {
       oldPrice: '₦999.99', 
       save: '₦200', 
       ownerImg: store?.ownerImg || null, 
-      owner: store?.name || 'Smart Haven',
+      owner: store?.name || 'TechCraft Hub',
       rating: 4.2,
       reviews: 220,
       verified: false
@@ -66,7 +66,7 @@ const StoreProducts = ({ store }) => {
       oldPrice: '₦3,999.99', 
       save: '₦500', 
       ownerImg: store?.ownerImg || null, 
-      owner: store?.name || 'GlowMart',
+      owner: store?.name || 'Bella Beauty Store',
       rating: 4.8,
       reviews: 180,
       verified: true
@@ -79,7 +79,7 @@ const StoreProducts = ({ store }) => {
       oldPrice: '₦15,999.99', 
       save: '₦3,000', 
       ownerImg: store?.ownerImg || null, 
-      owner: store?.name || 'TechZilla',
+      owner: store?.name || 'GreenLeaf Organics',
       rating: 4.6,
       reviews: 350,
       verified: false
@@ -92,7 +92,7 @@ const StoreProducts = ({ store }) => {
       oldPrice: '₦3,000.00', 
       save: '₦500', 
       ownerImg: store?.ownerImg || null, 
-      owner: store?.name || 'CozyHome',
+      owner: store?.name || 'HomeEssence',
       rating: 4.3,
       reviews: 120,
       verified: true
@@ -105,7 +105,7 @@ const StoreProducts = ({ store }) => {
       oldPrice: '₦1,599.99', 
       save: '₦300', 
       ownerImg: store?.ownerImg || null, 
-      owner: store?.name || 'Cool Breeze Stores',
+      owner: store?.name || 'Urban Wear',
       rating: 4.7,
       reviews: 280,
       verified: false

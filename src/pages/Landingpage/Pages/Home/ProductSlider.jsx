@@ -42,7 +42,7 @@ const ProductSlider = () => {
       oldPrice: '₦999.99', 
       save: '₦200', 
       ownerImg: StoreOwner2, 
-      owner: 'Smart Haven',
+      owner: 'TechCraft Hub',
       rating: 4.2,
       reviews: 220
     },
@@ -53,7 +53,7 @@ const ProductSlider = () => {
       oldPrice: '₦3,999.99', 
       save: '₦500', 
       ownerImg: StoreOwner3, 
-      owner: 'GlowMart',
+      owner: 'Bella Beauty Store',
       rating: 4.8,
       reviews: 180
     },
@@ -64,7 +64,7 @@ const ProductSlider = () => {
       oldPrice: '₦15,999.99', 
       save: '₦3,000', 
       ownerImg: StoreOwner4, 
-      owner: 'TechZilla',
+      owner: 'GreenLeaf Organics',
       rating: 4.6,
       reviews: 350
     },
@@ -75,7 +75,7 @@ const ProductSlider = () => {
       oldPrice: '₦3,000.00', 
       save: '₦500', 
       ownerImg: StoreOwner1, 
-      owner: 'CozyHome',
+      owner: 'HomeEssence',
       rating: 4.3,
       reviews: 120
     },
@@ -86,7 +86,7 @@ const ProductSlider = () => {
       oldPrice: '₦1,599.99', 
       save: '₦300', 
       ownerImg: StoreOwner2, 
-      owner: 'Cool Breeze Stores',
+      owner: 'Urban Wear',
       rating: 4.7,
       reviews: 280
     },
