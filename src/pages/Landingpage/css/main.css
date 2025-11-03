@@ -3815,6 +3815,7 @@ position: relative;
     top: 100%;
     left: 0;
     margin-top: 5px;
+    overflow: hidden;
 }
 
 .AGhs-Ul{
@@ -4391,6 +4392,22 @@ position: relative;
     gap: 8px;
     margin-top: 10px;
     flex-wrap: wrap;
+}
+.Hghhs-Btnca{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+.Hghhs-Btnca .Oks-BTNS-Gen-Drop{
+    min-width: 250px !important;
+}
+.HYhs-POla .Oks-BTNS-Gen-Drop{
+    min-width: 150px !important;
+    left: -50px !important;
+}
+.HYhs-POla .Oks-BTNS-Gen-Drop ul li{
+    user-select: none;
+    cursor: pointer;
 }
 .Oksu-TOop-BTNs button{
     position: relative;
