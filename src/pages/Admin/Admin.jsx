@@ -9,7 +9,9 @@ import AdminTopNavbar from "./Components/AdminTopNavbar";
 // Super Admin Pages
 import Dashboard from "./Pages/Dashboard";
 import ManageUsers from "./Pages/ManageUsers";
+import ManageStores from "./Pages/ManageStores";
 import ManageAdmins from "./Pages/ManageAdmins";
+import DisputeResolution from "./Pages/DisputeResolution";
 import PlatformSettings from "./Pages/PlatformSettings";
 import BroadcastCenter from "./Pages/BroadcastCenter";
 import ActivityLogs from "./Pages/ActivityLogs";
@@ -36,6 +38,9 @@ import AffiliateManagement from "./Pages/AffiliateManagement";
 import RevenueOverview from "./Pages/RevenueOverview";
 import Expenses from "./Pages/Expenses";
 import PaymentGateways from "./Pages/PaymentGateways";
+import ManageBusiness from "./Pages/ManageStores";
+import BusinessDetails from "./Pages/BuisnessDetails";
+import AdminDisputeDetailPage from "./Pages/AdminDisputeDetailsPage";
 
 const Admin = () => {
   useDocumentTitle("Admin Dashboard");
@@ -57,14 +62,14 @@ const Admin = () => {
   return (
     <div className="dashboard-body">
       <div className="dashboard-grid">
-        <AdminSideNavbar 
+        <AdminSideNavbar
           isOpen={isSidebarOpen}
           onClose={closeSidebar}
           adminRole={adminRole}
         />
-        
-        <div className="main-dashboard">        
-          <AdminTopNavbar 
+
+        <div className="main-dashboard">
+          <AdminTopNavbar
             onToggleSidebar={toggleSidebar}
             isSidebarOpen={isSidebarOpen}
           />
@@ -74,7 +79,12 @@ const Admin = () => {
               <Route path="/" element={<Dashboard />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/manage-users" element={<ManageUsers />} />
+              <Route path="/manage-Business" element={<ManageBusiness />} />
+              <Route path="/manage-Business/:id" element={<BusinessDetails />} />
+
               <Route path="/manage-admins" element={<ManageAdmins />} />
+              <Route path="/disputes" element={<DisputeResolution />} />
+              <Route path="/disputes/:id" element={<AdminDisputeDetailPage />} />
               <Route path="/platform-settings" element={<PlatformSettings />} />
               <Route path="/broadcast" element={<BroadcastCenter />} />
               <Route path="/activity-logs" element={<ActivityLogs />} />

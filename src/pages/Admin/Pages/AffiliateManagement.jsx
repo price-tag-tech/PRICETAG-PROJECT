@@ -12,3 +12,4 @@ const AffiliateManagement = () => {
 export default AffiliateManagement;
 
 
+
