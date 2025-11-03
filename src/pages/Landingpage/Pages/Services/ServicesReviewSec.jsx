@@ -1,7 +1,7 @@
 import { StarIcon } from "@heroicons/react/24/solid";
-import { StarIcon as StarOutlineIcon, PlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { StarIcon as StarOutlineIcon, PlusIcon, XMarkIcon, MinusIcon, ShareIcon, FlagIcon} from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   AreaChart,
   Area,
@@ -68,6 +68,12 @@ const ServicesReviewSec = () => {
   const [reviewComment, setReviewComment] = useState('');
   const [selectedStars, setSelectedStars] = useState(0);
 
+  // Share modal states
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const shareLink = window.location.href;
+  const modalRef = useRef(null);
+
   const handleAddReview = () => {
     setShowReviewModal(true);
   };
@@ -93,6 +99,20 @@ const ServicesReviewSec = () => {
       // In real app, send to API
       console.log('New review submitted:', newReview);
     }
+  };
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(shareLink);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
+
+  const handleCloseShareModal = () => {
+    setShowShareModal(false);
   };
 
   // ⭐ Graph data for 0–5 Star ratings
@@ -256,6 +276,61 @@ const ServicesReviewSec = () => {
         </div>
       </div>
 
+            <div className="Rafs-BABst">
+                <h3>Safety tips</h3>
+
+                <ul>
+                      <li>
+                        <MinusIcon />
+                        <span>Always verify the service provider’s identity and profile before booking.</span>
+                      </li>
+                      <li>
+                        <MinusIcon />
+                        <span>Check reviews and ratings from previous clients to confirm reliability.</span>
+                      </li>
+                      <li>
+                        <MinusIcon />
+                        <span>Discuss job details and pricing clearly before confirming the booking.</span>
+                      </li>
+                      <li>
+                        <MinusIcon />
+                        <span>Avoid sharing sensitive personal or financial information directly.</span>
+                      </li>
+                      <li>
+                        <MinusIcon />
+                        <span>Schedule meetings or services in safe, public, or well-monitored places.</span>
+                      </li>
+                      <li>
+                        <MinusIcon />
+                        <span>Do not make full payment upfront; pay only through our secure payment system.</span>
+                      </li>
+                      <li>
+                        <MinusIcon />
+                        <span>Ensure both parties agree on terms, scope of work, and refund policy.</span>
+                      </li>
+                      <li>
+                        <MinusIcon />
+                        <span>Trust your instincts — if something feels off, cancel the booking.</span>
+                      </li>
+                      <li>
+                        <MinusIcon />
+                        <span>Report any fraudulent, rude, or unsafe behavior immediately.</span>
+                      </li>
+                    </ul>
+                </div>
+
+
+                
+                <div className="OOks-Btns">
+                    <button 
+                      className="share-Btn custom-btn-radius" 
+                      onClick={() => setShowShareModal(true)}
+                    >
+                        <ShareIcon /> Share 
+                   </button>
+                  <a href="#" className="report-Btn custom-btn-radius"><FlagIcon /> Report Abuse</a>
+                </div>
+
       {/* Add Review Modal */}
       {showReviewModal && (
         <>
@@ -316,6 +391,54 @@ const ServicesReviewSec = () => {
                 Submit Review
               </button>
             </form>
+          </div>
+        </>
+      )}
+
+      {/* Share Modal */}
+      {showShareModal && (
+        <>
+          <div 
+            className="modal-backdrop" 
+            onClick={handleCloseShareModal}
+          />
+          <div 
+            className="cities-modal" 
+            ref={modalRef}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="modal-header">
+              <h3>Share Service</h3>
+              <button 
+                onClick={handleCloseShareModal}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}       
+              >
+                <XMarkIcon />
+              </button>
+            </div>
+            <div className="modal-body custom-scroll-bar">
+              <div className="review-input-group">
+                <label htmlFor="share-link">Service Link</label>
+                <input
+                  id="share-link"
+                  type="text"
+                  value={shareLink}
+                  readOnly
+                  placeholder="Service link will appear here"
+                />
+              </div>
+              <button 
+                type="button" 
+                className="custom-btn-background custom-btn-radius ssuba-btn"
+                onClick={handleCopy}
+              >
+                {copied ? 'Copied!' : 'Copy Link'}
+              </button>
+            </div>
           </div>
         </>
       )}
