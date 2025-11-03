@@ -12,3 +12,4 @@ const KYCReviews = () => {
 export default KYCReviews;
 
 
+

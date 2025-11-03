@@ -18,7 +18,7 @@ import {
   ArrowLeftIcon,
   ChevronDownIcon
 } from '@heroicons/react/24/outline';
-import { IconX, IconUsers, IconFileText, IconAlertCircle } from '@tabler/icons-react';
+import { IconX, IconUsers, IconFileText, IconAlertCircle, IconBuildingStore } from '@tabler/icons-react';
 import Logo from "../../../assets/images/logo.png";
 
 // Define menu items based on admin role
@@ -27,7 +27,9 @@ const getMenuItems = (adminRole) => {
     superAdmin: [
       { id: 'dashboard', label: 'Dashboard', icon: HomeIcon, path: '/admin/dashboard' },
       { id: 'manage-users', label: 'Manage Users', icon: UserGroupIcon, path: '/admin/manage-users' },
+      { id: 'manage-business', label: 'Manage Business', icon: IconBuildingStore, path: '/admin/manage-business' },
       { id: 'manage-admins', label: 'Manage Admins', icon: ShieldCheckIcon, path: '/admin/manage-admins' },
+      { id: 'disputes', label: 'Dispute Resolution', icon: IconAlertCircle, path: '/admin/disputes' },
       { id: 'platform-settings', label: 'Platform Settings', icon: Cog6ToothIcon, path: '/admin/platform-settings' },
       { id: 'broadcast', label: 'Broadcast Center', icon: BellIcon, path: '/admin/broadcast' },
       { id: 'activity-logs', label: 'Activity Logs', icon: DocumentTextIcon, path: '/admin/activity-logs' },

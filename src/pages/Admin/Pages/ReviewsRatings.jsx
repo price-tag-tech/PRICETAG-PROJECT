@@ -12,3 +12,4 @@ const ReviewsRatings = () => {
 export default ReviewsRatings;
 
 
+
