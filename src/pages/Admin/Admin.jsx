@@ -22,7 +22,7 @@ import AdminSettings from "./Pages/AdminSettings";
 import NewUserRequests from "./Pages/NewUserRequests";
 import KYCReviews from "./Pages/KYCReviews";
 import BusinessVerification from "./Pages/BusinessVerification";
-import Reminders from "./Pages/Reminders";
+
 import SuspendedAccounts from "./Pages/SuspendedAccounts";
 
 // Support Admin Pages
@@ -95,7 +95,7 @@ const Admin = () => {
               <Route path="/new-user-requests" element={<NewUserRequests />} />
               <Route path="/kyc-reviews" element={<KYCReviews />} />
               <Route path="/business-verification" element={<BusinessVerification />} />
-              <Route path="/reminders" element={<Reminders />} />
+
               <Route path="/suspended-accounts" element={<SuspendedAccounts />} />
 
               {/* Support Admin Routes */}
